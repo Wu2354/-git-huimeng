@@ -173,7 +173,7 @@ Material:
     - _Foam: 1.79
     - _FoamCascade: 15
     - _FoamDepth: 1.3
-    - _FoamFalloff: -2.7
+    - _FoamFalloff: -2
     - _FoamMetalic: 0
     - _FoamPower: 4
     - _FoamSmoothness: 0
@@ -220,7 +220,7 @@ Material:
     - _UVVDirection1UDirection0: 1
     - _Udirection: 0
     - _Vdirection: 0
-    - _WaterDeepTranslucencyPower: 0.02
+    - _WaterDeepTranslucencyPower: 0.14
     - _WaterDepth: 0.079
     - _WaterFallOfBorder: 9.32
     - _WaterFalloff: 0.143
@@ -229,12 +229,12 @@ Material:
     - _WaterNormalScale: 0.5
     - _WaterShalowDepth: 3.85
     - _WaterShalowFalloff: -3.43
-    - _WaterShalowTranslucencyPower: 2.73
+    - _WaterShalowTranslucencyPower: 0.69
     - _WaterSmoothness: 1.01
     - _WaterSpecular: 0.165
-    - _WaterSpecularClose: 0.28
-    - _WaterSpecularFar: 0.81
-    - _WaterSpecularThreshold: 0.05
+    - _WaterSpecularClose: 0.503
+    - _WaterSpecularFar: 0.823
+    - _WaterSpecularThreshold: 0
     - _WaterSpeed: 0.5
     - _WaterTessScale: 0.02
     - _WaterTiling: 100
