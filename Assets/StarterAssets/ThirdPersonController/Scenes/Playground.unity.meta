@@ -1,7 +1,13 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/StarterAssets/ThirdPersonController/Scenes/Playground.unity.meta
 guid: e9017d5f96b9f09489b4b37e1d6eb914
 DefaultImporter:
+========
+guid: e9e8c4281a342754486b5b968c5fcc2a
+NativeFormatImporter:
+>>>>>>>> 9ea99b94fee5063118a8bee14bfbd3e819552d71:Assets/zhanguan/Material ball/新建材质.mat.meta
   externalObjects: {}
+  mainObjectFileID: 2100000
   userData: 
   assetBundleName: 
   assetBundleVariant: 
