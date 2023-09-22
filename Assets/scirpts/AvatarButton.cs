@@ -15,6 +15,11 @@ public class AvatarButton : MonoBehaviour
     {
         if (isOn)
         {
+            if (gameObject.name == "boy" || gameObject.name == "girl")
+            {
+                AvatarSys._instance.SexChange();
+                return;
+            }
             string[] names = gameObject.name.Split('_');
             AvatarSys._instance.OnChangePeople(names[0], names[1]);
         }

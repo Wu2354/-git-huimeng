@@ -24,7 +24,21 @@ public class AvatarSys : MonoBehaviour
     //初始化信息
     private string[,] girlStr = new string[,] { { "Hair", "1" }, { "Bottom", "1" }, { "Footwear", "1" }, { "Top", "1" }, { "EyeLeft", "1" }, { "EyeRight", "1" }, { "Body", "1" }, { "Head", "1" } };
 
-    private  GameObject girlPanel;
+
+    // [2] 男孩换装，据女孩注释理解
+    private Transform boySourceTrans;//资源model
+    private GameObject boyTarget; //骨架物体，换装的人  
+    private Dictionary<string, Dictionary<string, SkinnedMeshRenderer>> boyData = new Dictionary<string, Dictionary<string, SkinnedMeshRenderer>>();
+
+    Transform[] boyHips;
+    //部位的名字，部位对应的skm
+    private Dictionary<string, SkinnedMeshRenderer> boySmr = new Dictionary<string, SkinnedMeshRenderer>();// 换装骨骼身上的skm信息
+    //初始化信息
+    private string[,] boyStr = new string[,] { { "Bottom", "1" }, { "Footwear", "1" }, { "Hair", "1" }, { "Top", "1" }, { "Eye", "1" }, { "Head", "1" }, { "Body", "1" } };
+
+    public int nowCount = 0; // 0代表小女孩，1 男孩
+    public GameObject girlPanel;
+    public GameObject boyPanel;
 
     void Awake()
     {
@@ -34,9 +48,11 @@ public class AvatarSys : MonoBehaviour
 
     void Start()
     {
-
-        GirlAvatar();                
-        girlTarget.AddComponent<SpinWithMouse>();        
+        BoyAvatar();
+        GirlAvatar();
+        boyTarget.AddComponent<SpinWithMouse>();                        
+        girlTarget.AddComponent<SpinWithMouse>(); 
+        boyTarget.SetActive(false);
     }
     public void GirlAvatar()
     {
@@ -44,8 +60,15 @@ public class AvatarSys : MonoBehaviour
         SaveData(girlSourceTrans, girlData, girlTarget, girlSmr);
         InitAvatarGirl();
     }
+    
+    public void BoyAvatar()
+    {
+        InstantiateBoy();
+        SaveData(boySourceTrans, boyData, boyTarget, boySmr);
+        InitAvatarBoy();
 
-   
+    }
+
     void InstantiateGirl()
     {
         GameObject go = Instantiate(Resources.Load("wumen")) as GameObject; //加载资源物体
@@ -55,11 +78,25 @@ public class AvatarSys : MonoBehaviour
         girlHips = girlTarget.GetComponentsInChildren<Transform>();
     }
 
+    void InstantiateBoy()
+    {
+        GameObject go = Instantiate(Resources.Load("man")) as GameObject; //加载资源物体
+        boySourceTrans = go.transform;
+        go.SetActive(false);
+        boyTarget = Instantiate(Resources.Load("man_target")) as GameObject;
+        boyHips = boyTarget.GetComponentsInChildren<Transform>();
+    }
+
     public GameObject GetGirlTarget()
     {
         return girlTarget;
     }
-    
+
+    public GameObject GetBoyTarget()
+    {
+        return boyTarget;
+    }
+
     void SaveData(Transform souceTrans, Dictionary<string, Dictionary<string, SkinnedMeshRenderer>> data, GameObject target,
         Dictionary<string, SkinnedMeshRenderer> smr)
     {
@@ -133,17 +170,48 @@ public class AvatarSys : MonoBehaviour
         }
 
     }
-   
+
+    void InitAvatarBoy()
+    { //初始化骨架让他有mesh 材质 骨骼信息
+        int length = boyStr.GetLength(0);//获得行数
+        for (int i = 0; i < length; i++)
+        {
+            ChangeMesh(boyStr[i, 0], boyStr[i, 1], boyData, boyHips, boySmr, boyStr); //穿上衣服
+        }
+
+    }
+
 
     public void OnChangePeople(string part, string num)
-    {                
-        ChangeMesh(part, num, girlData, girlHips, girlSmr, girlStr);        
+    {
+        if (nowCount == 0)
+        { //girl
+            ChangeMesh(part, num, girlData, girlHips, girlSmr, girlStr);
+        }
+        else
+        {
+            ChangeMesh(part, num, boyData, boyHips, boySmr, boyStr);
+        }
     }
 
     public void SexChange()
-    {        
-            girlTarget.SetActive(true);           
-            girlPanel.SetActive(true);        
+    {
+        if (nowCount == 0)
+        {
+            nowCount = 1;
+            boyTarget.SetActive(true);
+            girlTarget.SetActive(false);
+            boyPanel.SetActive(true);
+            girlPanel.SetActive(false);
+        }
+        else
+        {
+            nowCount = 0;
+            boyTarget.SetActive(false);
+            girlTarget.SetActive(true);
+            boyPanel.SetActive(false);
+            girlPanel.SetActive(true);
+        }
     }
 
     //用来保存使用的模型数据，通过单例实现多场景应用
