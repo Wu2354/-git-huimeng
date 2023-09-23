@@ -7,9 +7,7 @@ public class ChangePersonView : MonoBehaviour
     [SerializeField] GameObject firstPersonViewGO;
 
     [SerializeField] GameObject thirdPersonViewGO;
-    private bool IsFirstView = true;
-
-    
+    private bool IsFirstView = true;    
     private void Start()
     {
        
