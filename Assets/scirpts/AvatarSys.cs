@@ -34,7 +34,7 @@ public class AvatarSys : MonoBehaviour
     //部位的名字，部位对应的skm
     private Dictionary<string, SkinnedMeshRenderer> boySmr = new Dictionary<string, SkinnedMeshRenderer>();// 换装骨骼身上的skm信息
     //初始化信息
-    private string[,] boyStr = new string[,] { { "Bottom", "1" }, { "Footwear", "1" }, { "Hair", "1" }, { "Top", "1" }, { "Eye", "1" }, { "Head", "1" }, { "Body", "1" } };
+    private string[,] boyStr = new string[,] { { "Bottom", "1" }, { "Footwear", "1" }, { "Hair", "1" }, { "Top", "1" }, { "Eye", "1" }, { "Head", "1" } };
 
     public int nowCount = 0; // 0代表小女孩，1 男孩
     public GameObject girlPanel;
