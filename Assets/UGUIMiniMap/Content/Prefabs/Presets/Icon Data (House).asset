@@ -16,4 +16,4 @@ MonoBehaviour:
   DeathIcon: {fileID: 0}
   IconColor: {r: 0.7105025, g: 1, b: 0.0039215684, a: 1}
   Size: 15
-  OffScreenSize: 10
+  OffScreenSize: 15
