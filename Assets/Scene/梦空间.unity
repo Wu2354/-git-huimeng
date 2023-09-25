@@ -187,6 +187,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: -3.9999998
       objectReference: {fileID: 0}
+    - target: {fileID: 4708105552671890492, guid: c708a3b79cd542b42bbfedb17e213bc1, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5542111180780342640, guid: c708a3b79cd542b42bbfedb17e213bc1, type: 3}
       propertyPath: orthographic size
       value: 10
@@ -4008,6 +4012,10 @@ PrefabInstance:
       propertyPath: geometry
       value: 
       objectReference: {fileID: 53947774}
+    - target: {fileID: 4492899470037898995, guid: 7f86ff17ee328c24885ee22136288949, type: 3}
+      propertyPath: menAvatar
+      value: 
+      objectReference: {fileID: 9000000, guid: 8db2ed387d3ae6340862faf7e32d35de, type: 3}
     - target: {fileID: 4492899470037898995, guid: 7f86ff17ee328c24885ee22136288949, type: 3}
       propertyPath: TpersonAnimator
       value: 
