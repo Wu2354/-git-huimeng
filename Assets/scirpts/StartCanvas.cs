@@ -17,19 +17,19 @@ public class StartCanvas : MonoBehaviour
     
     private void Start()
     {        
-        PlaneBackground.SetActive(true);        
-        StartButtonText.gameObject.SetActive(true);//显示出按钮下面的提示文本
-        StartButtonText.DOFade(0, duration).SetLoops(-1, LoopType.Yoyo).SetEase(Ease.InOutSine);//给提示文本添加效果                       
-        
+        PlaneBackground.SetActive(true);
+        //StartButtonText.gameObject.SetActive(true);//显示出按钮下面的提示文本
+        //StartButtonText.DOFade(0, duration).SetLoops(-1, LoopType.Yoyo).SetEase(Ease.InOutSine);//给提示文本添加效果                       
+        StartCoroutine(ShowOpeningTexts());
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.KeypadEnter) || Input.GetKeyDown(KeyCode.Return))
-        {
-            StartGame();
-        }
-    }
+    //private void Update()
+    //{
+    //    if (Input.GetKeyDown(KeyCode.KeypadEnter) || Input.GetKeyDown(KeyCode.Return))
+    //    {
+    //        StartGame();
+    //    }
+    //}
 
     private IEnumerator ShowOpeningTexts()
     {

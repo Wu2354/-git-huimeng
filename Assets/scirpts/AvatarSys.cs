@@ -53,6 +53,7 @@ public class AvatarSys : MonoBehaviour
         boyTarget.AddComponent<SpinWithMouse>();                        
         girlTarget.AddComponent<SpinWithMouse>(); 
         boyTarget.SetActive(false);
+        boyPanel.SetActive(false);
     }
     public void GirlAvatar()
     {
