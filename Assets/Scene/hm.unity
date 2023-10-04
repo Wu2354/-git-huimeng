@@ -566,6 +566,18 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 581858584}
     - target: {fileID: 447557607, guid: 237378a02209ef34e87c087806e9346e, type: 3}
+      propertyPath: CompassSize
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 447557607, guid: 237378a02209ef34e87c087806e9346e, type: 3}
+      propertyPath: LerpRotation
+      value: 9.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 447557607, guid: 237378a02209ef34e87c087806e9346e, type: 3}
+      propertyPath: MiniMapLayer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 447557607, guid: 237378a02209ef34e87c087806e9346e, type: 3}
       propertyPath: MaxOffSetPosition.x
       value: 300
       objectReference: {fileID: 0}
@@ -579,7 +591,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7007974925636252978, guid: 237378a02209ef34e87c087806e9346e, type: 3}
       propertyPath: m_Alpha
-      value: 0.8
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7007974925636253004, guid: 237378a02209ef34e87c087806e9346e, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 7007974925636253004, guid: 237378a02209ef34e87c087806e9346e, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 7007974925636253005, guid: 237378a02209ef34e87c087806e9346e, type: 3}
       propertyPath: m_IsActive
@@ -629,6 +649,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7007974925980339988, guid: 237378a02209ef34e87c087806e9346e, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7007974925980339989, guid: 237378a02209ef34e87c087806e9346e, type: 3}
       propertyPath: m_Name
       value: MiniMap [Circle] [Style 1]
@@ -652,6 +676,10 @@ PrefabInstance:
     - target: {fileID: 7007974927113748499, guid: 237378a02209ef34e87c087806e9346e, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 18.136465
+      objectReference: {fileID: 0}
+    - target: {fileID: 7007974927153520490, guid: 237378a02209ef34e87c087806e9346e, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -17409,7 +17437,7 @@ Transform:
   m_GameObject: {fileID: 972273153}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 255.37, y: 20.96, z: 283.19}
+  m_LocalPosition: {x: 261.29, y: 20.96, z: 283.19}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
