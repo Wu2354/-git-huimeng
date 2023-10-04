@@ -13,7 +13,6 @@ public class AvatarSys : MonoBehaviour
     /*字典用来存放model里的各部位的组件信息，但单一字典不够用（不同部位也有不同的编号），用套嵌字典的方法
     //外嵌是查找部位，内嵌是部位的某一种
     此处字典存储所有mesh上的组件信息*/  
-
     //小女孩所有的资源信息   //部位的名字，部位编号，部位对应的skm
     private Dictionary<string, Dictionary<string, SkinnedMeshRenderer>> girlData = new Dictionary<string, Dictionary<string, SkinnedMeshRenderer>>();
 
@@ -22,7 +21,7 @@ public class AvatarSys : MonoBehaviour
     //部位的名字，部位对应的skm
     private Dictionary<string, SkinnedMeshRenderer> girlSmr = new Dictionary<string, SkinnedMeshRenderer>();// 换装骨骼身上的skm信息
     //初始化信息
-    private string[,] girlStr = new string[,] { { "Hair", "1" }, { "Bottom", "1" }, { "Footwear", "1" }, { "Top", "1" }, { "EyeLeft", "1" }, { "EyeRight", "1" }, { "Body", "1" }, { "Head", "1" } };
+    private string[,] girlStr = new string[,] { { "Hair", "1" }, { "Bottom", "1" }, { "Footwear", "1" }, { "Top", "1" },{ "Eye", "1" }, { "Head", "1" } };
 
 
     // [2] 男孩换装，据女孩注释理解
