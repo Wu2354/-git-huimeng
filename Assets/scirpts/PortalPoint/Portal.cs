@@ -4,13 +4,16 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class Portal : MonoBehaviour
-{      
+{
+    [Tooltip("此传送点的唯一ID，用于标识出口传送点。")]
+    public string portalID;
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
             // 设置传送点ID
-            PortalManager.Instance.LastUsedPortalID = gameObject.name;
+            PortalManager.Instance.LastUsedPortalID = portalID;
             // 尝试将物体的名称转换为整数作为场景索引
             if (int.TryParse(gameObject.name, out int sceneIndex))
             {
