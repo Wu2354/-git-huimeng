@@ -3,14 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class Trans_ObjName_scene : MonoBehaviour
-{
+public class Portal : MonoBehaviour
+{      
     private void OnTriggerEnter(Collider other)
     {
-        // 检查碰撞物体是否有“Player”标签
         if (other.CompareTag("Player"))
         {
-            // 尝试将物体的名称转换为整数
+            // 设置传送点ID
+            PortalManager.Instance.LastUsedPortalID = gameObject.name;
+            // 尝试将物体的名称转换为整数作为场景索引
             if (int.TryParse(gameObject.name, out int sceneIndex))
             {
                 // 加载与这个物体名称相对应的场景
@@ -19,7 +20,7 @@ public class Trans_ObjName_scene : MonoBehaviour
             else
             {
                 // 如果转换失败，打印一条错误消息
-                Debug.LogError("场景名称不是一个有效的整数: " + gameObject.name);
+                Debug.LogError("物体名称不是一个有效的整数: " + gameObject.name);
             }
         }
     }

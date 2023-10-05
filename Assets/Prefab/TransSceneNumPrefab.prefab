@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3005880977518127517}
   - component: {fileID: 6346698584738936249}
-  - component: {fileID: 7145994777921657185}
+  - component: {fileID: 5121288349990646790}
   m_Layer: 0
   m_Name: TransSceneNumPrefab
   m_TagString: Untagged
@@ -54,7 +54,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 6.583954}
   m_Center: {x: 0, y: 0, z: -1.649353}
---- !u!114 &7145994777921657185
+--- !u!114 &5121288349990646790
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -63,6 +63,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2563959719685463708}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 907eb1154c38e2e4f9f7bfd9d89d13dc, type: 3}
+  m_Script: {fileID: 11500000, guid: d101fe98902cff74eaf3f133618e843c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  portalID: 

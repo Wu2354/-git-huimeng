@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Icon: {fileID: 21300030, guid: b2ff3b281537fbc4d91af3e848afde5c, type: 3}
   DeathIcon: {fileID: 0}
-  IconColor: {r: 0, g: 0.76249933, b: 1, a: 1}
-  Size: 15
-  OffScreenSize: 15
+  IconColor: {r: 1, g: 0, b: 0.8999224, a: 1}
+  Size: 30
+  OffScreenSize: 12
