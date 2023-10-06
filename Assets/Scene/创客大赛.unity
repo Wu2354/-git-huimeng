@@ -36979,7 +36979,7 @@ GameObject:
   - component: {fileID: 5021718101486218071}
   - component: {fileID: 3462679897061268811}
   - component: {fileID: 5492383004198834827}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Plane054
   m_TagString: ExhibitionBoard
   m_Icon: {fileID: 0}
@@ -42554,7 +42554,7 @@ GameObject:
   - component: {fileID: 4128926647951028467}
   - component: {fileID: 7260985130089500032}
   - component: {fileID: 8632589265422165609}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Plane055
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -70674,7 +70674,7 @@ GameObject:
   - component: {fileID: 1112620898330974169}
   - component: {fileID: 7397941570211756493}
   - component: {fileID: 992129454264195767}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Plane056
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -74977,7 +74977,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!33 &4710309695362485612
 MeshFilter:
   m_ObjectHideFlags: 0
