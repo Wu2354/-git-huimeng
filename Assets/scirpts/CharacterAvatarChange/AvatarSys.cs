@@ -71,10 +71,10 @@ public class AvatarSys : MonoBehaviour
 
     void InstantiateGirl()
     {
-        GameObject go = Instantiate(Resources.Load("wumen")) as GameObject; //加载资源物体
+        GameObject go = Instantiate(Resources.Load("woman")) as GameObject; //加载资源物体
         girlSourceTrans = go.transform;
         go.SetActive(false);
-        girlTarget = Instantiate(Resources.Load("wumen_target")) as GameObject;
+        girlTarget = Instantiate(Resources.Load("woman_target")) as GameObject;
         girlHips = girlTarget.GetComponentsInChildren<Transform>();
     }
 
