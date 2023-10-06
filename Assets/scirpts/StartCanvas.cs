@@ -14,57 +14,58 @@ public class StartCanvas : MonoBehaviour
     
     public TextMeshProUGUI StartButtonText;//最后的按钮下的提示文本
 
-    
+    public Button middleScreenButton;  // 新增的屏幕中间的按钮
+    public TextMeshProUGUI middleButtonText;  // 按钮上的文本
+
+
     private void Start()
-    {        
+    {
         PlaneBackground.SetActive(true);
-        //StartButtonText.gameObject.SetActive(true);//显示出按钮下面的提示文本
-        //StartButtonText.DOFade(0, duration).SetLoops(-1, LoopType.Yoyo).SetEase(Ease.InOutSine);//给提示文本添加效果                       
         StartCoroutine(ShowOpeningTexts());
-    }
 
-    //private void Update()
-    //{
-    //    if (Input.GetKeyDown(KeyCode.KeypadEnter) || Input.GetKeyDown(KeyCode.Return))
-    //    {
-    //        StartGame();
-    //    }
-    //}
-
+        middleScreenButton.gameObject.SetActive(false);  // 初始化时隐藏按钮
+        middleScreenButton.onClick.AddListener(OnMiddleButtonClicked);  // 为按钮添加点击事件
+    }    
     private IEnumerator ShowOpeningTexts()
     {
         foreach (TextMeshProUGUI text in textObjects)
         {
-            text.gameObject.SetActive(true);  // Show the text object.
-            Sequence sequence = DOTween.Sequence();
+            text.gameObject.SetActive(true);  
+            Sequence sequence = DOTween.Sequence();//创建一个动画序列
+            //Append是按顺序播放
             sequence.Append(text.DOFade(1, duration));
             sequence.Append(text.DOFade(0, duration));
-            // Save original font size
+
+            // 保存当前文本的字体大小
             float originalSize = text.fontSize;
 
-            // Scale up during fade in
+            // 文本在淡入过程中的放大效果
             sequence.Insert(0, DOTween.To(() => text.fontSize, x => text.fontSize = x, 70f, duration));
-
-            // Scale down during fade out
+            // 文本在淡出过程中恢复原始大小
             sequence.Insert(duration, DOTween.To(() => text.fontSize, x => text.fontSize = x, originalSize, duration));
-            yield return new WaitForSeconds(duration*2);  // Wait for the fade in/out effect and delay.
-            text.gameObject.SetActive(false);  // Hide the text object.
 
+            yield return new WaitForSeconds(duration*2);  
+            text.gameObject.SetActive(false);  
         }
-        var planeBackgroundImage = PlaneBackground.GetComponent<Image>();
-        Sequence sequence1 = DOTween.Sequence();
-        sequence1.Append(planeBackgroundImage.DOFade(0, duration));
-        yield return new WaitForSeconds(duration);
+
+        //所有文本动画完成后显示屏幕中央按钮
+        middleScreenButton.gameObject.SetActive(true);
 
         isCoroutineFinished = true;
-        this.gameObject.SetActive(false);
-       
+        yield return null; // 这里可以直接返回，不再处理背景图片消失的逻辑
+
     }
 
-    private void StartGame()
-    {        
-        StartCoroutine(ShowOpeningTexts());
-        //隐藏提示文本        
-        StartButtonText.gameObject.SetActive(false);
+    // 当屏幕中央的按钮被点击时调用此方法
+    private void OnMiddleButtonClicked()
+    {
+
+        middleScreenButton.gameObject.SetActive(false); // 首先隐藏中央按钮
+
+        // 开始背景图片消失的逻辑
+        var planeBackgroundImage = PlaneBackground.GetComponent<Image>();
+        Sequence sequence = DOTween.Sequence();
+        sequence.Append(planeBackgroundImage.DOFade(0, duration));
+        sequence.OnComplete(() => this.gameObject.SetActive(false)); // 背景图片消失后关闭这个脚本绑定的物体
     }
 }
