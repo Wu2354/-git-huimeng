@@ -105,7 +105,7 @@ MonoBehaviour:
     value: 65472
   diffusion:
     overrideState: 1
-    value: 7.17
+    value: 3.63
   anamorphicRatio:
     overrideState: 1
     value: 0.15
