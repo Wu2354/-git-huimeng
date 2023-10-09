@@ -641,7 +641,19 @@ PrefabInstance:
       propertyPath: iconsAlwaysFacingUp
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1995449079, guid: 237378a02209ef34e87c087806e9346e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7007974925168201552, guid: 237378a02209ef34e87c087806e9346e, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7007974925169488777, guid: 237378a02209ef34e87c087806e9346e, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7007974925586971059, guid: 237378a02209ef34e87c087806e9346e, type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
@@ -713,6 +725,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: MiniMap [Circle] [Style 1]
       objectReference: {fileID: 0}
+    - target: {fileID: 7007974926230211130, guid: 237378a02209ef34e87c087806e9346e, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7007974926263306381, guid: 237378a02209ef34e87c087806e9346e, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: -31.8
@@ -747,11 +763,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7007974927113748499, guid: 237378a02209ef34e87c087806e9346e, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 24.067873
+      value: 24.067827
       objectReference: {fileID: 0}
     - target: {fileID: 7007974927113748499, guid: 237378a02209ef34e87c087806e9346e, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 18.136465
+      value: 18.13642
       objectReference: {fileID: 0}
     - target: {fileID: 7007974927153520490, guid: 237378a02209ef34e87c087806e9346e, type: 3}
       propertyPath: m_AnchoredPosition.x

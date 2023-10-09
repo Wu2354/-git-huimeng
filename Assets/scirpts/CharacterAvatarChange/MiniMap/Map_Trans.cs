@@ -4,8 +4,12 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.LowLevel;
 using UnityEngine.Rendering.PostProcessing;
 using UnityEngine.UI;
+
+
 
 public class Map_Trans : MonoBehaviour
 {
@@ -24,6 +28,8 @@ public class Map_Trans : MonoBehaviour
     
     private TextMeshProUGUI infoText; // 用于显示物体名称的TextMeshProUGUI
     public PostProcessVolume postProcessVolume; // 引用Post-Processing Volume
+    private Keyboard keyboard;
+
 
     private void Start()
     {
@@ -33,6 +39,8 @@ public class Map_Trans : MonoBehaviour
         PopulateDropdown();
 
         SureButton.onClick.AddListener(TeleportCharacter); // 添加传送功能到按钮点击事件
+
+        keyboard = Keyboard.current;
     }
 
     private void Update()
@@ -59,17 +67,20 @@ public class Map_Trans : MonoBehaviour
 
         int index = dropdown.value;
         if (index < targetObjects.Count)
-        {
+        {            
             StartCoroutine(DelayedTeleport(targetObjects[index].transform));
         }
     }
-
 
     void ToggleDropdownAndButton(bool view)
     {       
         dropdown.gameObject.SetActive(view);
         SureButton.gameObject.SetActive(view); // 显示/隐藏传送按钮
     }
+
+
+    // 模拟按键输入的函数
+    
 
     IEnumerator DelayedTeleport(Transform targetTrans)
     {
