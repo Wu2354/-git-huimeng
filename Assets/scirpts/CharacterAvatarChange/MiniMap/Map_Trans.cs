@@ -1,23 +1,29 @@
 using Cinemachine;
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Rendering.PostProcessing;
 using UnityEngine.UI;
 
 public class Map_Trans : MonoBehaviour
 {
-    [System.Serializable]
-    public struct TargetObject
-    {
-        public Transform targetTransform;
-        public string customName;
-    }    
+    //[System.Serializable]
+    //public struct TargetObject
+    //{
+    //    public Transform targetTransform;
+    //    public string customName;
+    //}    
+    
     public TMP_Dropdown dropdown;
     public Button SureButton; // 新增的传送按钮
-    public List<TargetObject> targetObjects;
+    //public List<TargetObject> targetObjects;
+    public List<GameObject> targetObjects;
     public GameObject thirdPersonCharacter;
-    private bool isDropdownVisible = false;    
+    
+    private TextMeshProUGUI infoText; // 用于显示物体名称的TextMeshProUGUI
+    public PostProcessVolume postProcessVolume; // 引用Post-Processing Volume
 
     private void Start()
     {
@@ -33,7 +39,7 @@ public class Map_Trans : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.M))
         {
-            ToggleDropdownAndButton();
+            ToggleDropdownAndButton(true);
         }
     }
 
@@ -41,38 +47,51 @@ public class Map_Trans : MonoBehaviour
     {
         dropdown.options.Clear();
 
-        foreach (TargetObject obj in targetObjects)
+        foreach (var obj in targetObjects)
         {
-            dropdown.options.Add(new TMP_Dropdown.OptionData(obj.customName));
+            dropdown.options.Add(new TMP_Dropdown.OptionData(obj.name));
         }
     }
 
     public void TeleportCharacter()
     {
+        ToggleDropdownAndButton(false);
+
         int index = dropdown.value;
         if (index < targetObjects.Count)
         {
-            StartCoroutine(DelayedTeleport(targetObjects[index].targetTransform));
+            StartCoroutine(DelayedTeleport(targetObjects[index].transform));
         }
     }
 
 
-    void ToggleDropdownAndButton()
-    {
-        isDropdownVisible = !isDropdownVisible;
-        dropdown.gameObject.SetActive(isDropdownVisible);
-        SureButton.gameObject.SetActive(isDropdownVisible); // 显示/隐藏传送按钮
+    void ToggleDropdownAndButton(bool view)
+    {       
+        dropdown.gameObject.SetActive(view);
+        SureButton.gameObject.SetActive(view); // 显示/隐藏传送按钮
     }
 
     IEnumerator DelayedTeleport(Transform targetTrans)
     {
+      
+        //传送
         yield return new WaitForSeconds(0.5f); // 例如延迟0.5秒，你可以根据需要调整
         thirdPersonCharacter.transform.position = targetTrans.position;
         thirdPersonCharacter.transform.position = targetTrans.position;
 
-        // Calculate direction to targetTrans and set as forward direction of thirdPersonCharacter
+        // 改变朝向（以下代码是错误的）
         Vector3 directionToTarget = (targetTrans.position - thirdPersonCharacter.transform.position).normalized;
         thirdPersonCharacter.transform.forward = new Vector3(directionToTarget.x, 0, directionToTarget.z);
+
+
+        // 在传送前启用Post-Processing效果
+        postProcessVolume.enabled = true;
+
+        infoText.text = targetTrans.name;
+        yield return new WaitForSeconds(1f);
+
+        // 在传送后禁用Post-Processing效果
+        postProcessVolume.enabled = false;
     }
 
 }
