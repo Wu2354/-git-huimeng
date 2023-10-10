@@ -2,6 +2,7 @@
 using UnityEngine.UI;
 using System.Collections;
 using UnityEngine.EventSystems;
+using System.Collections.Generic;
 
 namespace Lovatto.MiniMap
 {
@@ -46,8 +47,7 @@ namespace Lovatto.MiniMap
                 m_CanvasGroup.alpha = value * maxOpacity;
             }
         }
-        #endregion
-
+        #endregion    
         /// <summary>
         /// 
         /// </summary>
@@ -66,8 +66,11 @@ namespace Lovatto.MiniMap
             if (textAreaBackground != null) { textRect = textAreaBackground.GetComponent<RectTransform>(); textAreaBackground.SetActive(false); }
             m_CanvasGroup.alpha = 0;
             if (CircleAreaRect != null) { CircleAreaRect.gameObject.SetActive(false); }
-        }
 
+            TargetGraphic.raycastTarget = true;            
+
+        }  
+        
         /// <summary>
         /// 
         /// </summary>
@@ -237,6 +240,7 @@ namespace Lovatto.MiniMap
             if (miniMapItem == null) return;
             if (!miniMapItem.IsInteractable || miniMapItem.InteractAction != bl_MiniMapEntityBase.InteracableAction.OnTouch) return;
             OnInteract();
+
         }
 
         public void OnPointerExit(PointerEventData eventData)
@@ -254,7 +258,7 @@ namespace Lovatto.MiniMap
             isTextOpen = !isTextOpen;
             OnInteract(isTextOpen);
         }
-
+                
         /// <summary>
         /// 
         /// </summary>

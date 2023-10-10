@@ -493,7 +493,7 @@ public sealed class bl_MiniMap : MonoBehaviour
     /// <summary>
     /// This called one time when press the toggle key
     /// </summary>
-    void ToggleSize()
+    public void ToggleSize()
     {
         isFullScreen = !isFullScreen;
         if (isFullScreen) SetToFullscreenSize();

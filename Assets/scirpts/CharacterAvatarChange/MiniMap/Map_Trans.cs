@@ -29,6 +29,7 @@ public class Map_Trans : MonoBehaviour
     private TextMeshProUGUI infoText; // 用于显示物体名称的TextMeshProUGUI
     public PostProcessVolume postProcessVolume; // 引用Post-Processing Volume
     private Keyboard keyboard;
+    private bool OnView = false;
 
 
     private void Start()
@@ -39,7 +40,7 @@ public class Map_Trans : MonoBehaviour
         PopulateDropdown();
 
         SureButton.onClick.AddListener(TeleportCharacter); // 添加传送功能到按钮点击事件
-
+        
         keyboard = Keyboard.current;
     }
 
@@ -47,7 +48,8 @@ public class Map_Trans : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.M))
         {
-            ToggleDropdownAndButton(true);
+            OnView = !OnView;
+            ToggleDropdownAndButton(OnView);
         }
     }
 
@@ -62,9 +64,7 @@ public class Map_Trans : MonoBehaviour
     }
 
     public void TeleportCharacter()
-    {
-        ToggleDropdownAndButton(false);
-
+    {        
         int index = dropdown.value;
         if (index < targetObjects.Count)
         {            
@@ -87,8 +87,7 @@ public class Map_Trans : MonoBehaviour
       
         //传送
         yield return new WaitForSeconds(0.5f); // 例如延迟0.5秒，你可以根据需要调整
-        thirdPersonCharacter.transform.position = targetTrans.position;
-        thirdPersonCharacter.transform.position = targetTrans.position;
+        thirdPersonCharacter.transform.position = targetTrans.position;        
 
         // 改变朝向（以下代码是错误的）
         Vector3 directionToTarget = (targetTrans.position - thirdPersonCharacter.transform.position).normalized;
