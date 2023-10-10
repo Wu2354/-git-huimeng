@@ -2509,12 +2509,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 545352348}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 668.67, y: 23.03, z: 396.33}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 254.96997, y: 1.2940006, z: 168.82999}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 2014919345}
+  m_Father: {fileID: 2039520426}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &545352350
 MonoBehaviour:
@@ -35720,6 +35720,7 @@ MonoBehaviour:
   - {fileID: 972273153}
   thirdPersonCharacter: {fileID: 581858584}
   postProcessVolume: {fileID: 1431548932}
+  mainCamera: {fileID: 1431548930}
 --- !u!1 &1418688780
 GameObject:
   m_ObjectHideFlags: 0
@@ -35903,7 +35904,7 @@ Camera:
   m_AllowMSAA: 1
   m_AllowDynamicResolution: 0
   m_ForceIntoRT: 0
-  m_OcclusionCulling: 1
+  m_OcclusionCulling: 0
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
 --- !u!4 &1431548931
@@ -48749,6 +48750,38 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 886624498}
     m_Modifications:
+    - target: {fileID: 320068928553148596, guid: e226fade64668484082acf28eb80c08a, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: a55372f7fa8d75547ab5396e9e2a47d3, type: 2}
+    - target: {fileID: 320068928553148596, guid: e226fade64668484082acf28eb80c08a, type: 3}
+      propertyPath: m_fontStyle
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1631181932103330610, guid: e226fade64668484082acf28eb80c08a, type: 3}
+      propertyPath: m_fontSize
+      value: 13.97
+      objectReference: {fileID: 0}
+    - target: {fileID: 1631181932103330610, guid: e226fade64668484082acf28eb80c08a, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: a55372f7fa8d75547ab5396e9e2a47d3, type: 2}
+    - target: {fileID: 1631181932103330610, guid: e226fade64668484082acf28eb80c08a, type: 3}
+      propertyPath: m_fontStyle
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1631181932103330610, guid: e226fade64668484082acf28eb80c08a, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 13.97
+      objectReference: {fileID: 0}
+    - target: {fileID: 1631181932103330610, guid: e226fade64668484082acf28eb80c08a, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -8453736615345967376, guid: a55372f7fa8d75547ab5396e9e2a47d3, type: 2}
+    - target: {fileID: 1631181932103330610, guid: e226fade64668484082acf28eb80c08a, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6068094559280587601, guid: e226fade64668484082acf28eb80c08a, type: 3}
       propertyPath: m_Name
       value: Trans_Dopdown
@@ -48831,6 +48864,22 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6327384966057043113, guid: e226fade64668484082acf28eb80c08a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7861459970313679249, guid: e226fade64668484082acf28eb80c08a, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: a55372f7fa8d75547ab5396e9e2a47d3, type: 2}
+    - target: {fileID: 7861459970313679249, guid: e226fade64668484082acf28eb80c08a, type: 3}
+      propertyPath: m_fontStyle
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7861459970313679249, guid: e226fade64668484082acf28eb80c08a, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -8453736615345967376, guid: a55372f7fa8d75547ab5396e9e2a47d3, type: 2}
+    - target: {fileID: 7861459970313679249, guid: e226fade64668484082acf28eb80c08a, type: 3}
+      propertyPath: m_hasFontAssetChanged
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -49202,7 +49251,7 @@ Transform:
   m_GameObject: {fileID: 1975882150}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0.76995665, z: 0, w: 0.6380963}
-  m_LocalPosition: {x: 303.61, y: 22, z: 496.93}
+  m_LocalPosition: {x: 305.49, y: 22, z: 500.35}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -49383,7 +49432,6 @@ Transform:
   - {fileID: 474427841}
   - {fileID: 1632607381}
   - {fileID: 1176041339}
-  - {fileID: 545352349}
   - {fileID: 2039520426}
   - {fileID: 1215165359}
   - {fileID: 1028355713}
@@ -49420,7 +49468,8 @@ Transform:
   m_LocalPosition: {x: 413.7, y: 21.736, z: 227.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 545352349}
   m_Father: {fileID: 2014919345}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2039520427

@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.LowLevel;
+using System.Runtime.InteropServices;
 using UnityEngine.Rendering.PostProcessing;
 using UnityEngine.UI;
 
@@ -30,11 +30,12 @@ public class Map_Trans : MonoBehaviour
     public PostProcessVolume postProcessVolume; // 引用Post-Processing Volume
     private Keyboard keyboard;
     private bool OnView = false;
+    private int index;//物体索引
+    [SerializeField] Camera mainCamera;
 
 
     private void Start()
-    {
-        
+    {        
         dropdown.gameObject.SetActive(false);
         SureButton.gameObject.SetActive(false); // 初始隐藏传送按钮
         PopulateDropdown();
@@ -42,6 +43,8 @@ public class Map_Trans : MonoBehaviour
         SureButton.onClick.AddListener(TeleportCharacter); // 添加传送功能到按钮点击事件
         
         keyboard = Keyboard.current;
+
+        index = dropdown.value;
     }
 
     private void Update()
@@ -52,6 +55,15 @@ public class Map_Trans : MonoBehaviour
             ToggleDropdownAndButton(OnView);
         }
     }
+
+
+    [DllImport("User32.dll", EntryPoint = "keybd_event")]  
+    static extern void keybd_event(
+        byte bVk, //虚拟键值 对应按键的ascll码十进制值  
+        byte bScan, //0
+        int dwFlags, //0 为按下，1按住，2为释放 
+        int dwExtraInfo //0
+    );
 
     void PopulateDropdown()
     {
@@ -65,9 +77,10 @@ public class Map_Trans : MonoBehaviour
 
     public void TeleportCharacter()
     {        
-        int index = dropdown.value;
+        
         if (index < targetObjects.Count)
-        {            
+        {
+            keybd_event(77, 0, 1, 0);//M键的按下操作
             StartCoroutine(DelayedTeleport(targetObjects[index].transform));
         }
     }
@@ -88,16 +101,18 @@ public class Map_Trans : MonoBehaviour
         //传送
         yield return new WaitForSeconds(0.5f); // 例如延迟0.5秒，你可以根据需要调整
         thirdPersonCharacter.transform.position = targetTrans.position;        
-
-        // 改变朝向（以下代码是错误的）
-        Vector3 directionToTarget = (targetTrans.position - thirdPersonCharacter.transform.position).normalized;
-        thirdPersonCharacter.transform.forward = new Vector3(directionToTarget.x, 0, directionToTarget.z);
+        
+        //朝向
+        yield return new WaitForSeconds(0.5f);
+        Vector3 directionToTarget = targetObjects[index].transform.position - mainCamera.transform.position;
+        directionToTarget.Normalize(); // 将方向向量标准化
+        mainCamera.transform.forward = directionToTarget;
 
 
         // 在传送前启用Post-Processing效果
         postProcessVolume.enabled = true;
 
-        infoText.text = targetTrans.name;
+        //infoText.text = targetTrans.name;
         yield return new WaitForSeconds(1f);
 
         // 在传送后禁用Post-Processing效果
