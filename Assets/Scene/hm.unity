@@ -35721,7 +35721,10 @@ MonoBehaviour:
   thirdPersonCharacter: {fileID: 581858584}
   postProcessVolume: {fileID: 1431548932}
 <<<<<<< HEAD
+<<<<<<< HEAD
   mainCamera: {fileID: 1431548930}
+=======
+>>>>>>> parent of 9bbbae5 (01)
 =======
 >>>>>>> parent of 9bbbae5 (01)
 --- !u!1 &1418688780
