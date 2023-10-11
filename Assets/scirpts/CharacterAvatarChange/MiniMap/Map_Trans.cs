@@ -27,7 +27,7 @@ public class Map_Trans : MonoBehaviour
     public GameObject thirdPersonCharacter;
     
     private TextMeshProUGUI infoText; // 用于显示物体名称的TextMeshProUGUI
-    public PostProcessVolume postProcessVolume; // 引用Post-Processing Volume
+    //public PostProcessVolume postProcessVolume; // 引用Post-Processing Volume
    
     private bool OnView = false;
     private int index;
