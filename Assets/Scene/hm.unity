@@ -35720,7 +35720,8 @@ MonoBehaviour:
   - {fileID: 972273153}
   thirdPersonCharacter: {fileID: 581858584}
   postProcessVolume: {fileID: 1431548932}
-  mainCamera: {fileID: 1431548930}
+  virtualCamera: {fileID: 1710893807}
+  miniMap: {fileID: 0}
 --- !u!1 &1418688780
 GameObject:
   m_ObjectHideFlags: 0
@@ -38184,6 +38185,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 6572597848904848292, guid: 04423cade0247f34fa0f84d9ca69c9d3, type: 3}
   m_PrefabInstance: {fileID: 4968171639786526925}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1710893807 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3203261902030644825, guid: c708a3b79cd542b42bbfedb17e213bc1, type: 3}
+  m_PrefabInstance: {fileID: 441840582}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45e653bab7fb20e499bda25e1b646fea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1713528752 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5284828153751479857, guid: 04423cade0247f34fa0f84d9ca69c9d3, type: 3}

@@ -28,10 +28,17 @@ public class Map_Trans : MonoBehaviour
     
     private TextMeshProUGUI infoText; // 用于显示物体名称的TextMeshProUGUI
     public PostProcessVolume postProcessVolume; // 引用Post-Processing Volume
-    private Keyboard keyboard;
+   
     private bool OnView = false;
     private int index;
+    public CinemachineVirtualCamera virtualCamera;
+    public bl_MiniMap miniMap;
 
+
+    private void Awake()
+    {
+        miniMap = GetComponent<bl_MiniMap>();
+    }
 
     private void Start()
     {        
@@ -39,17 +46,15 @@ public class Map_Trans : MonoBehaviour
         SureButton.gameObject.SetActive(false); // 初始隐藏传送按钮
         PopulateDropdown();
 
-        SureButton.onClick.AddListener(TeleportCharacter); // 添加传送功能到按钮点击事件
-        
-        keyboard = Keyboard.current;
+        SureButton.onClick.AddListener(TeleportCharacter); // 添加传送功能到按钮点击事件                
     }
 
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.M))
         {
-            OnView = !OnView;
-            ToggleDropdownAndButton(OnView);
+            //OnView = !OnView;
+            ToggleDropdownAndButton(true);
         }
     }
 
@@ -62,6 +67,7 @@ public class Map_Trans : MonoBehaviour
         int dwExtraInfo //0
     );
 
+    //给下拉框添加名称    
     void PopulateDropdown()
     {
         dropdown.options.Clear();
@@ -72,47 +78,63 @@ public class Map_Trans : MonoBehaviour
         }
     }
 
+    //按钮触发逻辑
     public void TeleportCharacter()
-    {        
+    {
+        
         index = dropdown.value;
         if (index < targetObjects.Count)
         {
-            keybd_event(77, 0, 1, 0);//M键的按下操作
+           
+            // 设置虚拟摄像机的LookAt目标为指定物体（未实现）
+            virtualCamera.LookAt = targetObjects[index].transform;
+            //跳转的协程逻辑
             StartCoroutine(DelayedTeleport(targetObjects[index].transform));
+            //跳转就会自动变为小地图
+            miniMap.SetToMiniMapSize();
+            ToggleDropdownAndButton(false);
         }
     }
 
+    //控制下拉框的显示
     void ToggleDropdownAndButton(bool view)
     {       
         dropdown.gameObject.SetActive(view);
         SureButton.gameObject.SetActive(view); // 显示/隐藏传送按钮
     }
-
-
-    // 模拟按键输入的函数
     
 
+    //传送的携程
     IEnumerator DelayedTeleport(Transform targetTrans)
-    {
-      
+    {        
         //传送
-        yield return new WaitForSeconds(0.5f); // 例如延迟0.5秒，你可以根据需要调整
+        yield return new WaitForSeconds(0.5f); // 例如延迟0.5秒，你可以根据需要调整        
         thirdPersonCharacter.transform.position = targetTrans.position; 
         thirdPersonCharacter.transform.rotation = targetTrans.rotation;
 
+        keybd_event(77, 0, 1, 0);//M键的按下操作
+
+        // 计算摄像机朝向目标物体的Z轴方向
+        //Vector3 cameraLookDirection = targetTrans.forward;
+
+        // 设置虚拟摄像机的朝向
+        //virtualCamera.transform.rotation = Quaternion.LookRotation(cameraLookDirection);
+
         //朝向
-        //yield return new WaitForSeconds(0.5f);
-        //targetObjects[index].transform.position = thirdPersonCharacter.transform.
+        /*yield return new WaitForSeconds(0.5f);
+        index = dropdown.value;
+        Vector3 directionToTarget = targetObjects[index].transform.position - thirdPersonCharacter.transform.position;
+        directionToTarget.Normalize();
+        mainCamera.transform.LookAt(directionToTarget);*/
 
 
-
-        // 在传送前启用Post-Processing效果
+        // 在传送后启用Post-Processing效果
         postProcessVolume.enabled = true;
 
-        //infoText.text = targetTrans.name;
+        infoText.text = targetTrans.name;
         yield return new WaitForSeconds(1f);
 
-        // 在传送后禁用Post-Processing效果
+        // 过一秒禁用Post-Processing效果
         postProcessVolume.enabled = false;
     }
 
