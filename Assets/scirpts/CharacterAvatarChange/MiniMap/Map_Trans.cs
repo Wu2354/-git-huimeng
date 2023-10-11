@@ -32,7 +32,7 @@ public class Map_Trans : MonoBehaviour
     private bool OnView = false;
     private int index;
     public CinemachineVirtualCamera virtualCamera;
-    public bl_MiniMap miniMap;
+    private bl_MiniMap miniMap;
 
 
     private void Awake()
@@ -129,13 +129,13 @@ public class Map_Trans : MonoBehaviour
 
 
         // 在传送后启用Post-Processing效果
-        postProcessVolume.enabled = true;
+        /*postProcessVolume.enabled = true;
 
         infoText.text = targetTrans.name;
         yield return new WaitForSeconds(1f);
 
         // 过一秒禁用Post-Processing效果
-        postProcessVolume.enabled = false;
+        postProcessVolume.enabled = false;*/
     }
 
 }
