@@ -30,8 +30,7 @@ public class Map_Trans : MonoBehaviour
     public PostProcessVolume postProcessVolume; // 引用Post-Processing Volume
     private Keyboard keyboard;
     private bool OnView = false;
-    private int index;//物体索引
-    [SerializeField] Camera mainCamera;
+    private int index;
 
 
     private void Start()
@@ -43,8 +42,6 @@ public class Map_Trans : MonoBehaviour
         SureButton.onClick.AddListener(TeleportCharacter); // 添加传送功能到按钮点击事件
         
         keyboard = Keyboard.current;
-
-        index = dropdown.value;
     }
 
     private void Update()
@@ -77,7 +74,7 @@ public class Map_Trans : MonoBehaviour
 
     public void TeleportCharacter()
     {        
-        
+        index = dropdown.value;
         if (index < targetObjects.Count)
         {
             keybd_event(77, 0, 1, 0);//M键的按下操作
@@ -100,13 +97,13 @@ public class Map_Trans : MonoBehaviour
       
         //传送
         yield return new WaitForSeconds(0.5f); // 例如延迟0.5秒，你可以根据需要调整
-        thirdPersonCharacter.transform.position = targetTrans.position;        
-        
+        thirdPersonCharacter.transform.position = targetTrans.position; 
+        thirdPersonCharacter.transform.rotation = targetTrans.rotation;
+
         //朝向
-        yield return new WaitForSeconds(0.5f);
-        Vector3 directionToTarget = targetObjects[index].transform.position - mainCamera.transform.position;
-        directionToTarget.Normalize(); // 将方向向量标准化
-        mainCamera.transform.forward = directionToTarget;
+        //yield return new WaitForSeconds(0.5f);
+        //targetObjects[index].transform.position = thirdPersonCharacter.transform.
+
 
 
         // 在传送前启用Post-Processing效果
