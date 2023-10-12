@@ -1,35 +1,29 @@
 using Cinemachine;
-using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.InputSystem;
-using System.Runtime.InteropServices;
 using UnityEngine.Rendering.PostProcessing;
 using UnityEngine.UI;
+using DG.Tweening;
+
 
 
 
 public class Map_Trans : MonoBehaviour
 {
-    //[System.Serializable]
-    //public struct TargetObject
-    //{
-    //    public Transform targetTransform;
-    //    public string customName;
-    //}    
-    
+           
     public TMP_Dropdown dropdown;
-    public Button SureButton; // 新增的传送按钮
-    //public List<TargetObject> targetObjects;
+    public Button SureButton; // 新增的传送按钮    
     public List<GameObject> targetObjects;
     public GameObject thirdPersonCharacter;
     
-    private TextMeshProUGUI infoText; // 用于显示物体名称的TextMeshProUGUI
-    //public PostProcessVolume postProcessVolume; // 引用Post-Processing Volume
-   
-    private bool OnView = false;
+    //控制跳转后模糊文字显示
+    public TextMeshProUGUI infoText; // 用于显示物体名称的TextMeshProUGUI
+    public PostProcessVolume postProcessVolume; // 引用Post-Processing Volume
+    private DepthOfField depthOfField;//后处理的景深效果
+     
+    //控制小地图
     private int index;
     public CinemachineVirtualCamera virtualCamera;
     private bl_MiniMap miniMap;
@@ -46,7 +40,10 @@ public class Map_Trans : MonoBehaviour
         SureButton.gameObject.SetActive(false); // 初始隐藏传送按钮
         PopulateDropdown();
 
-        SureButton.onClick.AddListener(TeleportCharacter); // 添加传送功能到按钮点击事件                
+        SureButton.onClick.AddListener(TeleportCharacter); // 添加传送功能到按钮点击事件
+
+        // 获取Depth of Field效果的引用
+        postProcessVolume.profile.TryGetSettings(out depthOfField);
     }
 
     private void Update()
@@ -58,16 +55,10 @@ public class Map_Trans : MonoBehaviour
         }
     }
 
-
-    [DllImport("User32.dll", EntryPoint = "keybd_event")]  
-    static extern void keybd_event(
-        byte bVk, //虚拟键值 对应按键的ascll码十进制值  
-        byte bScan, //0
-        int dwFlags, //0 为按下，1按住，2为释放 
-        int dwExtraInfo //0
-    );
-
-    //给下拉框添加名称    
+    
+    /// <summary>
+    /// 给下拉框其中元素显示指定文字
+    /// </summary>
     void PopulateDropdown()
     {
         dropdown.options.Clear();
@@ -78,7 +69,9 @@ public class Map_Trans : MonoBehaviour
         }
     }
 
-    //按钮触发逻辑
+    /// <summary>
+    /// 按钮触发逻辑
+    /// </summary>
     public void TeleportCharacter()
     {
         
@@ -96,7 +89,10 @@ public class Map_Trans : MonoBehaviour
         }
     }
 
-    //控制下拉框的显示
+    /// <summary>
+    /// 控制下拉框的显示
+    /// </summary>
+    /// <param name="view"></param>
     void ToggleDropdownAndButton(bool view)
     {       
         dropdown.gameObject.SetActive(view);
@@ -104,15 +100,17 @@ public class Map_Trans : MonoBehaviour
     }
     
 
-    //传送的携程
+    /// <summary>
+    /// 传送，景深模糊显示文字，朝向（未解决）
+    /// </summary>
+    /// <param name="targetTrans">这是目标地点的物体位置</param>
+    /// <returns></returns>
     IEnumerator DelayedTeleport(Transform targetTrans)
     {        
         //传送
         yield return new WaitForSeconds(0.5f); // 例如延迟0.5秒，你可以根据需要调整        
         thirdPersonCharacter.transform.position = targetTrans.position; 
         thirdPersonCharacter.transform.rotation = targetTrans.rotation;
-
-        keybd_event(77, 0, 1, 0);//M键的按下操作
 
         // 计算摄像机朝向目标物体的Z轴方向
         //Vector3 cameraLookDirection = targetTrans.forward;
@@ -128,14 +126,28 @@ public class Map_Trans : MonoBehaviour
         mainCamera.transform.LookAt(directionToTarget);*/
 
 
-        // 在传送后启用Post-Processing效果
-        /*postProcessVolume.enabled = true;
+        /*
+         * 后处理模糊效果用post中的景深
+         */        
+        depthOfField.focusDistance.value = 0.2f; // 根据需要调整
 
-        infoText.text = targetTrans.name;
+        // 显示传送文字
+        infoText.text = "Teleported to " + targetTrans.name;
+        infoText.gameObject.SetActive(true);
+        //设置完全不透明
+        infoText.color = new Color(infoText.color.r, infoText.color.g, infoText.color.b, 1f);
+
         yield return new WaitForSeconds(1f);
 
-        // 过一秒禁用Post-Processing效果
-        postProcessVolume.enabled = false;*/
-    }
+        // 恢复清晰效果（动画形式）
+        DOVirtual.Float(0.2f, 10f, 1f, value => {
+            depthOfField.focusDistance.value = value;
+        });
 
+        //文字缓动消失 
+        infoText.DOFade(0f, 1f).OnComplete(() => {
+            infoText.gameObject.SetActive(false);
+        });
+    }
+    
 }
