@@ -132,7 +132,7 @@ public class Map_Trans : MonoBehaviour
         depthOfField.focusDistance.value = 0.2f; // 根据需要调整
 
         // 显示传送文字
-        infoText.text = "Teleported to " + targetTrans.name;
+        infoText.text = "欢迎来到 " + targetTrans.name;
         infoText.gameObject.SetActive(true);
         //设置完全不透明
         infoText.color = new Color(infoText.color.r, infoText.color.g, infoText.color.b, 1f);
