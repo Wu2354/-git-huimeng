@@ -34399,6 +34399,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 189.32
       objectReference: {fileID: 0}
+    - target: {fileID: 6738438431717866001, guid: 9c6225e700e2b7c4ab26350fc3d2775a, type: 3}
+      propertyPath: m_Materials.Array.data[11]
+      value: 
+      objectReference: {fileID: -1709277514330460371, guid: 17ed56d8f01340d4e8db17a3ae578db7, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
