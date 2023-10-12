@@ -24,9 +24,12 @@ public class Map_Trans : MonoBehaviour
     private DepthOfField depthOfField;//后处理的景深效果
      
     //控制小地图
-    private int index;
-    public CinemachineVirtualCamera virtualCamera;
+    private int index;    
     private bl_MiniMap miniMap;
+
+    //朝向
+    public CinemachineVirtualCamera virtualCamera;
+    public GameObject personRoot;
 
 
     private void Awake()
@@ -78,9 +81,7 @@ public class Map_Trans : MonoBehaviour
         index = dropdown.value;
         if (index < targetObjects.Count)
         {
-           
-            // 设置虚拟摄像机的LookAt目标为指定物体（未实现）
-            virtualCamera.LookAt = targetObjects[index].transform;
+                       
             //跳转的协程逻辑
             StartCoroutine(DelayedTeleport(targetObjects[index].transform));
             //跳转就会自动变为小地图
@@ -109,26 +110,18 @@ public class Map_Trans : MonoBehaviour
     {        
         //传送
         yield return new WaitForSeconds(0.5f); // 例如延迟0.5秒，你可以根据需要调整        
-        thirdPersonCharacter.transform.position = targetTrans.position; 
-        thirdPersonCharacter.transform.rotation = targetTrans.rotation;
+        thirdPersonCharacter.transform.position = targetTrans.position;
+        thirdPersonCharacter.transform.forward = targetTrans.forward;
 
-        // 计算摄像机朝向目标物体的Z轴方向
-        //Vector3 cameraLookDirection = targetTrans.forward;
-
-        // 设置虚拟摄像机的朝向
-        //virtualCamera.transform.rotation = Quaternion.LookRotation(cameraLookDirection);
-
-        //朝向
-        /*yield return new WaitForSeconds(0.5f);
-        index = dropdown.value;
-        Vector3 directionToTarget = targetObjects[index].transform.position - thirdPersonCharacter.transform.position;
-        directionToTarget.Normalize();
-        mainCamera.transform.LookAt(directionToTarget);*/
+        // 设置Cinemachine的Follow和LookAt属性
+        virtualCamera.Follow = thirdPersonCharacter.transform;
+        virtualCamera.LookAt = thirdPersonCharacter.transform;
+        virtualCamera.Follow = personRoot.transform;
 
 
         /*
          * 后处理模糊效果用post中的景深
-         */        
+         */
         depthOfField.focusDistance.value = 0.2f; // 根据需要调整
 
         // 显示传送文字
