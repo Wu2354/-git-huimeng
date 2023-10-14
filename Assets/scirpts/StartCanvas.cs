@@ -16,6 +16,7 @@ public class StartCanvas : MonoBehaviour
 
     public Button middleScreenButton;  // 新增的屏幕中间的按钮
     public TextMeshProUGUI middleButtonText;  // 按钮上的文本
+    [SerializeField] GameObject girlHairPanel;
 
 
     private void Start()
@@ -61,7 +62,7 @@ public class StartCanvas : MonoBehaviour
     {
 
         middleScreenButton.gameObject.SetActive(false); // 首先隐藏中央按钮
-
+        girlHairPanel.SetActive(true);
         // 开始背景图片消失的逻辑
         var planeBackgroundImage = PlaneBackground.GetComponent<Image>();
         Sequence sequence = DOTween.Sequence();
