@@ -205,7 +205,7 @@ public class AvatarSys : MonoBehaviour
             girlPanel.SetActive(false);
         }
         else
-        {
+        { 
             nowCount = 0;
             boyTarget.SetActive(false);
             girlTarget.SetActive(true);
