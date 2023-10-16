@@ -17,17 +17,19 @@ public class Map_Trans : MonoBehaviour
     public Button SureButton; // 新增的传送按钮    
     public List<GameObject> targetObjects;
     public GameObject thirdPersonCharacter;
-    
-    //控制跳转后模糊文字显示
+    private bool Onview = false;
+   
+    [Header("跳转文字设置")]
     public TextMeshProUGUI infoText; // 用于显示物体名称的TextMeshProUGUI
     public PostProcessVolume postProcessVolume; // 引用Post-Processing Volume
     private DepthOfField depthOfField;//后处理的景深效果
-     
-    //控制小地图
+    public float timrText = 1f;
+
+    [Header("小地图")]
     private int index;    
     private bl_MiniMap miniMap;
 
-    //朝向
+    [Header("朝向设置")]
     public CinemachineVirtualCamera virtualCamera;
     public GameObject personRoot;
 
@@ -53,8 +55,8 @@ public class Map_Trans : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.M))
         {
-            //OnView = !OnView;
-            ToggleDropdownAndButton(true);
+            Onview = !Onview;
+            ToggleDropdownAndButton(Onview);
         }
     }
 
@@ -76,17 +78,16 @@ public class Map_Trans : MonoBehaviour
     /// 按钮触发逻辑
     /// </summary>
     public void TeleportCharacter()
-    {
-        
+    {        
         index = dropdown.value;
         if (index < targetObjects.Count)
-        {
-                       
+        {                       
             //跳转的协程逻辑
             StartCoroutine(DelayedTeleport(targetObjects[index].transform));
             //跳转就会自动变为小地图
             miniMap.SetToMiniMapSize();
-            ToggleDropdownAndButton(false);
+            Onview = !Onview;
+            ToggleDropdownAndButton(Onview);
         }
     }
 
@@ -130,7 +131,7 @@ public class Map_Trans : MonoBehaviour
         //设置完全不透明
         infoText.color = new Color(infoText.color.r, infoText.color.g, infoText.color.b, 1f);
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(timrText);
 
         // 恢复清晰效果（动画形式）
         DOVirtual.Float(0.2f, 10f, 1f, value => {
