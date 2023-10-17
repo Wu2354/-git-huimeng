@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: Assets/Scene/DressChange.unity
     guid: a012681226987ed41bf8dc45c2e967bf
   - enabled: 1
+    path: Assets/Scene/Loading.unity
+    guid: e7b645e3024a08341b70b5856278d309
+  - enabled: 1
     path: Assets/Scene/hm.unity
     guid: cd4e5eb5136758042a974d7e3dd57d13
   - enabled: 1
