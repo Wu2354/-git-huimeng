@@ -19,7 +19,7 @@ public class Portal : MonoBehaviour
             // 尝试将物体的名称转换为整数作为场景索引
             if (int.TryParse(gameObject.name, out int sceneIndex))
             {
-                loadingPanel.SetSceneToLoad(sceneIndex);
+                LoadingPanel.SetSceneToLoad(sceneIndex);
                 SceneManager.LoadScene("Loading");
                 // 加载与这个物体名称相对应的场景
                 //SceneManager.LoadScene(sceneIndex);
