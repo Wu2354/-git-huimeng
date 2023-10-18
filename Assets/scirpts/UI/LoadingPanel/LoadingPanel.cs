@@ -10,9 +10,9 @@ public class LoadingPanel : MonoBehaviour
 
     [SerializeField] Image panelImage;
     private float currtProgress; //加载进度
-    private float loadTime = 2f; //(虚假的)加载时间
+    private static float loadTime = 3f; //(虚假的)加载时间
     [SerializeField] TextMeshProUGUI text; //百分比显示
-    public bool isReally = true; //用来调整是否异步加载
+    private static bool isReally = true; //用来调整是否异步加载
     AsyncOperation operation;
     private static int sceneToLoad; //静态变量可以全局改变
 
@@ -68,8 +68,19 @@ public class LoadingPanel : MonoBehaviour
        
     }
 
+    //用来其他脚本调用改变（异场景调用故static）
     public static void SetSceneToLoad(int sceneIndex)
     {
         sceneToLoad = sceneIndex;
+    }
+
+    public static void SetAsyncLoading(bool asyncLoading)
+    {
+        isReally = asyncLoading;
+    }
+
+    public static void SetLoadTime(float loadtime)
+    {
+        loadTime = loadtime;
     }
 }
