@@ -68,7 +68,7 @@ public class LoadingPanel : MonoBehaviour
        
     }
 
-    public void SetSceneToLoad(int sceneIndex)
+    public static void SetSceneToLoad(int sceneIndex)
     {
         sceneToLoad = sceneIndex;
     }
