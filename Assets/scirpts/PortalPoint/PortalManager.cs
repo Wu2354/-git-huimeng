@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 public class PortalManager : MonoBehaviour
 {
     public static PortalManager Instance { get; private set; }
-    
+
     [Tooltip("您的主场景的名称，例如 'MainScene'")]
     public string mainSceneName = "hm";
 
@@ -29,20 +29,27 @@ public class PortalManager : MonoBehaviour
     {
         if (scene.name == mainSceneName) // 如果
         {
-            Portal exitPortal = FindPortalWithID(LastUsedPortalID);
-            if (exitPortal)
+            StartCoroutine(DelayedPortalPlacement());
+        }
+    }
+
+    private System.Collections.IEnumerator DelayedPortalPlacement()
+    {
+        yield return new WaitForSeconds(0.1f); // 等待0.1秒或更长时间，可以根据需要调整
+
+        Portal exitPortal = FindPortalWithID(LastUsedPortalID);
+        if (exitPortal)
+        {
+            GameObject player = GameObject.FindGameObjectWithTag("Player");
+            if (player)
             {
-                GameObject player = GameObject.FindGameObjectWithTag("Player");
-                if (player)
-                {
-                    player.transform.position = exitPortal.transform.position - exitPortal.transform.right * 2f;
-                    player.transform.rotation = exitPortal.transform.rotation;
-                }
+                player.transform.position = exitPortal.transform.position - exitPortal.transform.right * 2f;
+                player.transform.rotation = exitPortal.transform.rotation;
             }
         }
     }
 
-    private Portal FindPortalWithID(string id)
+    public Portal FindPortalWithID(string id)
     {
         foreach (Portal portal in FindObjectsOfType<Portal>())
         {

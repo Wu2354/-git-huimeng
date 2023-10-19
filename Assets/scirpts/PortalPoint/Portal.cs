@@ -7,7 +7,7 @@ public class Portal : MonoBehaviour
 {
     [Tooltip("此传送点的唯一ID，用于标识出口传送点。")]
     public string portalID;
-    public LoadingPanel loadingPanel;
+    private LoadingPanel loadingPanel;
 
     
     private void OnTriggerEnter(Collider other)
