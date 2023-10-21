@@ -1,98 +1,75 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
+[RequireComponent(typeof(Animator))]
 public class ElevatorController : MonoBehaviour
 {
-    public Dropdown floorDropdown;
-    public float floorHeight = 3.65f;
-    private Vector3 targetPosition;
-    private bool isMoving = false;
-    private int currentFloor = 0;
+    [SerializeField] float elevatorSpeed = 3f;
+    [SerializeField] TMP_Dropdown floorDropdown;
+    [SerializeField] float floorHeight = 3.65f;
+
+    private Vector3 initialPosition;
     private Animator doorAnimator;
+    private bool isPlayerInside = false;
 
-    // 动画触发名字
-    private string isOpenBool = "isOpen";
-    private string shouldPlayBool = "shouldPlay";
-
-    private string doorProgressParam = "DoorProgress";
-
+    // 动画名
+    private string openDoorAnimation = "OpenElevator";
+    private string closeDoorAnimation = "CloseElevator";
 
     private void Start()
     {
-        doorAnimator = GetComponentInChildren<Animator>(); // Assuming Animator is attached to ElevatorDoors
-        floorDropdown.onValueChanged.AddListener(MoveToFloor);
+        initialPosition = transform.position;
+        doorAnimator = GetComponent<Animator>();
     }
 
     private void Update()
     {
-        if (isMoving)
+        if (isPlayerInside && Input.GetKeyDown(KeyCode.E))  // E键为确认键，可以根据需要更改
         {
-            transform.position = Vector3.MoveTowards(transform.position, targetPosition, 2f * Time.deltaTime);
-
-            if (transform.position == targetPosition)
-            {
-                isMoving = false;
-                UpdateCurrentFloor();
-                OpenDoors(); // Open doors when elevator stops
-            }
+            int selectedFloor = floorDropdown.value + 1;  // +1因为楼层从1开始
+            MoveElevator(selectedFloor);
         }
     }
 
-    public void MoveToFloor(int floorNumber)
+    private void MoveElevator(int floor)
     {
-        if (!isMoving)
-        {
-            CloseDoors(); // Close doors before moving
-            targetPosition = new Vector3(transform.position.x, floorNumber * floorHeight, transform.position.z);
-            isMoving = true;
-        }
+        Vector3 targetPosition = initialPosition + new Vector3(0, floorHeight * (floor - 1), 0);
+        StartCoroutine(MoveToPosition(targetPosition));
     }
 
-    private void UpdateCurrentFloor()
+    private IEnumerator MoveToPosition(Vector3 targetPosition)
     {
-        currentFloor = Mathf.RoundToInt(transform.position.y / floorHeight);
-    }
+        doorAnimator.Play(closeDoorAnimation);
 
-    public void ToggleDoor(bool open)
-    {
-        if (doorAnimator == null) return;
+        // 等待一段时间确保门关闭
+        yield return new WaitForSeconds(2f);
 
-        doorAnimator.SetBool(shouldPlayBool, true);
-
-        if (open)
+        while (Vector3.Distance(transform.position, targetPosition) > 0.1f)
         {
-            doorAnimator.SetBool(isOpenBool, true);
-        }
-        else
-        {
-            doorAnimator.SetBool(isOpenBool, false);
-        }
-    }
-
-    private IEnumerator AnimateDoors(float target)
-    {
-        float currentProgress = doorAnimator.GetFloat(doorProgressParam);
-        float duration = 1f; // The time it takes for the door to fully open/close
-        float startTime = Time.time;
-
-        while (Time.time < startTime + duration)
-        {
-            float elapsed = Time.time - startTime;
-            doorAnimator.SetFloat(doorProgressParam, Mathf.Lerp(currentProgress, target, elapsed / duration));
+            transform.position = Vector3.MoveTowards(transform.position, targetPosition, elevatorSpeed * Time.deltaTime);
             yield return null;
         }
 
-        doorAnimator.SetFloat(doorProgressParam, target);
+        doorAnimator.Play(openDoorAnimation);
     }
 
-    private void OpenDoors()
+    private void OnTriggerEnter(Collider other)
     {
-        StartCoroutine(AnimateDoors(1f)); // Open
+        if (other.CompareTag("Player"))
+        {
+            doorAnimator.Play(openDoorAnimation);
+            isPlayerInside = true;
+        }
     }
 
-    private void CloseDoors()
+    private void OnTriggerExit(Collider other)
     {
-        StartCoroutine(AnimateDoors(0f)); // Close
+        if (other.CompareTag("Player"))
+        {
+            doorAnimator.Play(closeDoorAnimation);
+            isPlayerInside = false;
+        }
     }
 }
