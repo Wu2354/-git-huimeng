@@ -8,11 +8,13 @@ public class ElevatorController : MonoBehaviour
 {
     [SerializeField] float elevatorSpeed = 3f;
     [SerializeField] TMP_Dropdown floorDropdown;
+    [SerializeField] GameObject dropDownObj;
     [SerializeField] float floorHeight = 3.65f;
 
     private Vector3 initialPosition;
     private Animator doorAnimator;
     private bool isPlayerInside = false;
+    private int currentFloor = 1;  // 默认电梯在第一层
 
     // 动画名
     private string openDoorAnimation = "OpenElevator";
@@ -21,22 +23,14 @@ public class ElevatorController : MonoBehaviour
     private void Start()
     {
         initialPosition = transform.position;
-        doorAnimator = GetComponent<Animator>();
+        doorAnimator = transform.GetChild(0).GetComponent<Animator>();
+        dropDownObj.SetActive(false);
     }
-
-    private void Update()
-    {
-        if (isPlayerInside && Input.GetKeyDown(KeyCode.E))  // E键为确认键，可以根据需要更改
-        {
-            int selectedFloor = floorDropdown.value + 1;  // +1因为楼层从1开始
-            MoveElevator(selectedFloor);
-        }
-    }
-
+   
     private void MoveElevator(int floor)
     {
         Vector3 targetPosition = initialPosition + new Vector3(0, floorHeight * (floor - 1), 0);
-        StartCoroutine(MoveToPosition(targetPosition));
+        StartCoroutine(MoveToPosition(targetPosition)); 
     }
 
     private IEnumerator MoveToPosition(Vector3 targetPosition)
@@ -51,16 +45,29 @@ public class ElevatorController : MonoBehaviour
             transform.position = Vector3.MoveTowards(transform.position, targetPosition, elevatorSpeed * Time.deltaTime);
             yield return null;
         }
-
         doorAnimator.Play(openDoorAnimation);
+
+        // 更新电梯的当前楼层
+        currentFloor = Mathf.RoundToInt((transform.position.y - initialPosition.y) / floorHeight) + 1;
+    }
+
+    public void MoveElevator()
+    {
+        int selectedFloor = floorDropdown.value + 1;
+        if (selectedFloor != currentFloor)  // 只有当选择的楼层与当前楼层不同时，才移动电梯
+        {
+            Vector3 targetPosition = initialPosition + new Vector3(0, floorHeight * (selectedFloor - 1), 0);
+            StartCoroutine(MoveToPosition(targetPosition));
+        }
     }
 
     private void OnTriggerEnter(Collider other)
-    {
+    {        
         if (other.CompareTag("Player"))
         {
             doorAnimator.Play(openDoorAnimation);
             isPlayerInside = true;
+            ToggleDropdownDisplay();
         }
     }
 
@@ -69,7 +76,13 @@ public class ElevatorController : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             doorAnimator.Play(closeDoorAnimation);
-            isPlayerInside = false;
+            isPlayerInside = false;            
         }
+    }
+
+    //切换dropdown的状态
+    private void ToggleDropdownDisplay()
+    {
+        dropDownObj.SetActive(!dropDownObj.activeSelf);
     }
 }
