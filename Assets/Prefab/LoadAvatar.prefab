@@ -46,5 +46,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   geometry: {fileID: 0}
   wumenAvatar: {fileID: 9000000, guid: 17ed56d8f01340d4e8db17a3ae578db7, type: 3}
-  menAvatar: {fileID: 9000000, guid: e89527f10af41484fac83eabad06d495, type: 3}
+  menAvatar: {fileID: 9000000, guid: 3d824c17338e3ef4ab71f417d67c6e33, type: 3}
   TpersonAnimator: {fileID: 0}
