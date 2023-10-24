@@ -228,6 +228,16 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c708a3b79cd542b42bbfedb17e213bc1, type: 3}
+--- !u!95 &53947774 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 5777780407979046064, guid: c708a3b79cd542b42bbfedb17e213bc1, type: 3}
+  m_PrefabInstance: {fileID: 53947773}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &53947775 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6900890504709024280, guid: c708a3b79cd542b42bbfedb17e213bc1, type: 3}
+  m_PrefabInstance: {fileID: 53947773}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &130917206
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3196,6 +3206,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: LoadAvatar
       objectReference: {fileID: 0}
+    - target: {fileID: 4492899470037898995, guid: 7f86ff17ee328c24885ee22136288949, type: 3}
+      propertyPath: geometry
+      value: 
+      objectReference: {fileID: 53947775}
+    - target: {fileID: 4492899470037898995, guid: 7f86ff17ee328c24885ee22136288949, type: 3}
+      propertyPath: TpersonAnimator
+      value: 
+      objectReference: {fileID: 53947774}
     - target: {fileID: 8035361243403836814, guid: 7f86ff17ee328c24885ee22136288949, type: 3}
       propertyPath: m_LocalPosition.x
       value: 602.789
