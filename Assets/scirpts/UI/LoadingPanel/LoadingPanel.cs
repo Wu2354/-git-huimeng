@@ -43,8 +43,7 @@ public class LoadingPanel : MonoBehaviour
             else
             {
                 SceneManager.LoadScene(sceneToLoad);
-            }
-            
+            }            
         }
     } 
 
@@ -63,9 +62,7 @@ public class LoadingPanel : MonoBehaviour
         {
             currtProgress = Mathf.Clamp01(operation.progress / 0.9f); //operation.progress只有0到0.9
             OnAmountLineChage(currtProgress);
-        }
-
-       
+        }       
     }
 
     //用来其他脚本调用改变（异场景调用故static）
