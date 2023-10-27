@@ -40,8 +40,9 @@ public class DialogManager : MonoBehaviour
     }
     void Start()
     {
-        UpdateText("凌光", "欢迎来到学堂");
-        UpdateImage("凌光", true);
+        //UpdateText("凌光", "欢迎来到学堂");
+        //UpdateImage("凌光", true);
+        ReadText(dialogDataFile);
     }
         
     void Update()
@@ -65,5 +66,10 @@ public class DialogManager : MonoBehaviour
         {
             imageRight.sprite = imageDic[_name];
         }
+    }
+    public void ReadText(TextAsset _textAsset)
+    {
+        string[] rows = _textAsset.text.Split("\n");
+        Debug.Log("读取成功");
     }
 }
