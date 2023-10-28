@@ -69,7 +69,11 @@ public class DialogManager : MonoBehaviour
     }
     public void ReadText(TextAsset _textAsset)
     {
-        string[] rows = _textAsset.text.Split("\n");
+        string[] rows = _textAsset.text.Split('\n');
+        foreach (var row in rows)
+        {
+            string[] cell = row.Split(',');
+        }
         Debug.Log("∂¡»°≥…π¶");
-    }
+    } 
 }
