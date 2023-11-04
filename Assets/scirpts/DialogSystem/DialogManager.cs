@@ -5,6 +5,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
+using System.Text.RegularExpressions;
 
 public class DialogManager : MonoBehaviour
 {
@@ -150,17 +151,21 @@ public class DialogManager : MonoBehaviour
             GameObject button = Instantiate(optionButton, buttonGroup);
             //绑定按钮事件
             button.GetComponentInChildren<TMP_Text>().text = cells[4];
-            button.GetComponent<Button>().onClick.AddListener( 
-                ()=> OnOptionClick( int.Parse(cells[5]))
-            if(cells[6] != null)
-            {
 
-            }
-            
-            );
+            //按钮分支选择效果的添加（搭配对话文本实现）
+            /*button.GetComponent<Button>().onClick.AddListener(() =>
+            {
+                OnOptionClick(int.Parse(cells[5]));
+                if (cells.Length > 6 && cells[6] != null)
+                {
+                    string[] effect = cells[6].Split("@");
+                    cells[7] = Regex.Replace(cells[7], @"[\r\n]", "");
+                    OptionEffect(effect[0], int.Parse(effect[1]), cells[7]);                    
+                }
+            });*/
             GenerateOption(_index + 1);
         }        
-    }
+    }   
 
     public void OnOptionClick(int _id)
     {
