@@ -12,4 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf07cb9c813283b4a93d9a608057212b, type: 3}
   m_Name: 1
   m_EditorClassIdentifier: 
-  persons: []
+  persons:
+  - name: ling
+    likeValue: 0
+    strengthValue: 0
+    dialogFile: {fileID: 4900000, guid: 62d21e6ad7fdf9843aeae43c92e4fa2e, type: 3}
+    isAvailable: 1

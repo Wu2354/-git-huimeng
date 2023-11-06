@@ -54,8 +54,14 @@ public class DialogManager : MonoBehaviour
     /// 选项按钮父节点，用于自动排列。
     /// </summary>
     [SerializeField] Transform buttonGroup;
-
+    /// <summary>
+    /// 动态跟踪NPC在游戏中的状态,例如好感度和体力值
+    /// </summary>
     public List<Person> people = new List<Person>();
+    /// <summary>
+    /// 对话面板UI根物体
+    /// </summary>
+    [SerializeField] GameObject dialogUI;
 
     private void Awake()
     {
@@ -72,7 +78,7 @@ public class DialogManager : MonoBehaviour
     }
     void Start()
     {       
-        ReadText(dialogDataFile);
+        //ReadText(dialogDataFile);
         ShowDialogRow();
     }
         
@@ -133,14 +139,14 @@ public class DialogManager : MonoBehaviour
             }
             else if (cells[0] == "END" && int.Parse(cells[1]) == dialogIndex)
             {
-                Debug.Log("对话结束");
+                EndDialogue();
             }
         }
     }
         
     public void OnclickNext()
     {
-        ShowDialogRow();       
+        ShowDialogRow();        
     }
 
     public void GenerateOption(int _index)
@@ -153,16 +159,16 @@ public class DialogManager : MonoBehaviour
             button.GetComponentInChildren<TMP_Text>().text = cells[4];
 
             //按钮分支选择效果的添加（搭配对话文本实现）
-            /*button.GetComponent<Button>().onClick.AddListener(() =>
+            button.GetComponent<Button>().onClick.AddListener(() =>
             {
                 OnOptionClick(int.Parse(cells[5]));
                 if (cells.Length > 6 && cells[6] != null)
                 {
                     string[] effect = cells[6].Split("@");
                     cells[7] = Regex.Replace(cells[7], @"[\r\n]", "");
-                    OptionEffect(effect[0], int.Parse(effect[1]), cells[7]);                    
+                    //OptionEffect(effect[0], int.Parse(effect[1]), cells[7]);
                 }
-            });*/
+            });
             GenerateOption(_index + 1);
         }        
     }   
@@ -178,7 +184,7 @@ public class DialogManager : MonoBehaviour
         nextButton.gameObject.SetActive(true );
     }
 
-    public void OptionEffect(string _effect,  int _param, string _target)
+    private void OptionEffect(string _effect,  int _param, string _target)
     {
         if(_effect == "好感度增加")
         {
@@ -200,5 +206,18 @@ public class DialogManager : MonoBehaviour
                 }
             }
         }
+    }
+    public void StartDialogue(TextAsset dialogText)
+    {
+        ReadText(dialogText);
+        dialogUI.SetActive(true); // 激活对话界面
+        ShowDialogRow(); // 显示当前对话行
+    }
+    
+    public void EndDialogue()
+    {
+        dialogUI.SetActive(false); // 关闭对话界面
+        // 清理或重置其他对话相关的状态
+        Debug.Log("对话结束");
     }
 }
