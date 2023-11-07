@@ -9,48 +9,48 @@ using UnityEngine.UI;
 public class DialogManager : MonoBehaviour
 {
     /// <summary>
-    /// ¶Ô»°ÎÄ±¾ÎÄ¼þ
+    /// ï¿½Ô»ï¿½ï¿½Ä±ï¿½ï¿½Ä¼ï¿½
     /// </summary>
     [SerializeField] TextAsset dialogDataFile;
     /// <summary>
-    /// ×óÓÒ²à½ÇÉ«Í¼Ïñ
+    /// ï¿½ï¿½ï¿½Ò²ï¿½ï¿½É«Í¼ï¿½ï¿½
     /// </summary>
     [SerializeField] Image imageLeft;
     [SerializeField] Image imageRight;
     /// <summary>
-    /// ½ÇÉ«Ãû³ÆÎÄ±¾
+    /// ï¿½ï¿½É«ï¿½ï¿½ï¿½ï¿½ï¿½Ä±ï¿½
     /// </summary>
     [SerializeField] TMP_Text nameText;
     /// <summary>
-    /// ¶Ô»°ÄÚÈÝÎÄ±¾
+    /// ï¿½Ô»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä±ï¿½
     /// </summary>
     [SerializeField] TMP_Text dialogText;
     /// <summary>
-    /// ½ÇÉ«Í¼Æ¬ÁÐ±í
+    /// ï¿½ï¿½É«Í¼Æ¬ï¿½Ð±ï¿½
     /// </summary>
     [SerializeField] List<Sprite> images = new List<Sprite>();
     /// <summary>
-    /// ½ÇÉ«Ãû×Ö¶ÔÓ¦Í¼Æ¬µÄ×Öµä
+    /// ï¿½ï¿½É«ï¿½ï¿½ï¿½Ö¶ï¿½Ó¦Í¼Æ¬ï¿½ï¿½ï¿½Öµï¿½
     /// </summary>
     Dictionary<string, Sprite> imageDic = new Dictionary<string, Sprite>();
     /// <summary>
-    /// µ±Ç°µÄ¶Ô»°Ë÷Òý
+    /// ï¿½ï¿½Ç°ï¿½Ä¶Ô»ï¿½ï¿½ï¿½ï¿½ï¿½
     /// </summary>
     [SerializeField] int dialogIndex;
     /// <summary>
-    /// ¶Ô»°ÎÄ±¾°´ÐÐ·Ö¸î
+    /// ï¿½Ô»ï¿½ï¿½Ä±ï¿½ï¿½ï¿½ï¿½Ð·Ö¸ï¿½
     /// </summary>
     [SerializeField] string[] dialogRows;
     /// <summary>
-    /// ¼ÌÐø¶Ô»°°´Å¥
+    /// ï¿½ï¿½ï¿½ï¿½ï¿½Ô»ï¿½ï¿½ï¿½Å¥
     /// </summary>
     [SerializeField] Button nextButton;
     /// <summary>
-    /// Ñ¡Ïî°´Å¥Ô¤ÖÆÌå
+    /// Ñ¡ï¿½î°´Å¥Ô¤ï¿½ï¿½ï¿½ï¿½
     /// </summary>
     [SerializeField] GameObject optionButton;
     /// <summary>
-    /// Ñ¡Ïî°´Å¥¸¸½Úµã£¬ÓÃÓÚ×Ô¶¯ÅÅÁÐ¡£
+    /// Ñ¡ï¿½î°´Å¥ï¿½ï¿½ï¿½Úµã£¬ï¿½ï¿½ï¿½ï¿½ï¿½Ô¶ï¿½ï¿½ï¿½ï¿½Ð¡ï¿½
     /// </summary>
     [SerializeField] Transform buttonGroup;
 
@@ -58,15 +58,15 @@ public class DialogManager : MonoBehaviour
 
     private void Awake()
     {
-        imageDic["Áè¹â"] = images[0];
-        imageDic["¸ÊÓê"] = images[1];
+        imageDic["ï¿½ï¿½ï¿½"] = images[0];
+        imageDic["ï¿½ï¿½ï¿½ï¿½"] = images[1];
         
         Person person1 = new Person();
-        person1.name = "Áè¹â";
+        person1.name = "ï¿½ï¿½ï¿½";
         people.Add(person1);
 
         Person person2 = new Person();
-        person2.name = "¸ÊÓê";
+        person2.name = "ï¿½ï¿½ï¿½ï¿½";
         people.Add(person2);
     }
     void Start()
@@ -88,11 +88,11 @@ public class DialogManager : MonoBehaviour
 
     private void UpdateImage(string _name,string _position)
     {
-        if(_position == "×ó")
+        if(_position == "ï¿½ï¿½")
         {
             imageLeft.sprite = imageDic[_name];
         }
-        else if(_position == "ÓÒ")
+        else if(_position == "ï¿½ï¿½")
         {
             imageLeft.sprite = imageDic[_name];
         }
@@ -104,12 +104,12 @@ public class DialogManager : MonoBehaviour
         //{
         //    string[] cell = row.Split(',');            
         //}
-        Debug.Log("¶ÁÈ¡³É¹¦");
+        Debug.Log("ï¿½ï¿½È¡ï¿½É¹ï¿½");
     } 
 
 
     /// <summary>
-    /// ÎÄ±¾ÅÐ¶Ï£¬¹¦ÄÜÌí¼Ó¶¼ÔÚÕâÀï
+    /// ï¿½Ä±ï¿½ï¿½Ð¶Ï£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     /// </summary>
     public void ShowDialogRow()
     {
@@ -132,7 +132,7 @@ public class DialogManager : MonoBehaviour
             }
             else if (cells[0] == "END" && int.Parse(cells[1]) == dialogIndex)
             {
-                Debug.Log("¶Ô»°½áÊø");
+                Debug.Log("ï¿½Ô»ï¿½ï¿½ï¿½ï¿½ï¿½");
             }
         }
     }
@@ -148,10 +148,10 @@ public class DialogManager : MonoBehaviour
         if (cells[0] == "@")
         {
             GameObject button = Instantiate(optionButton, buttonGroup);
-            //°ó¶¨°´Å¥ÊÂ¼þ
+            //ï¿½ó¶¨°ï¿½Å¥ï¿½Â¼ï¿½
             button.GetComponentInChildren<TMP_Text>().text = cells[4];
             button.GetComponent<Button>().onClick.AddListener( 
-                ()=> OnOptionClick( int.Parse(cells[5]))
+                ()=> OnOptionClick( int.Parse(cells[5])); 
             if(cells[6] != null)
             {
 
@@ -175,7 +175,7 @@ public class DialogManager : MonoBehaviour
 
     public void OptionEffect(string _effect,  int _param, string _target)
     {
-        if(_effect == "ºÃ¸Ð¶ÈÔö¼Ó")
+        if(_effect == "ï¿½Ã¸Ð¶ï¿½ï¿½ï¿½ï¿½ï¿½")
         {
             foreach(var person in people)
             {
@@ -185,7 +185,7 @@ public class DialogManager : MonoBehaviour
                 }
             }
         }
-        else if(_effect == "ÌåÁ¦ÖµÔö¼Ó")
+        else if(_effect == "ï¿½ï¿½ï¿½ï¿½Öµï¿½ï¿½ï¿½ï¿½")
         {
             foreach (var person in people)
             {
