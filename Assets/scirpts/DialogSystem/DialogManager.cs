@@ -5,81 +5,80 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
+using System.Text.RegularExpressions;
 
 public class DialogManager : MonoBehaviour
 {
     /// <summary>
-    /// ï¿½Ô»ï¿½ï¿½Ä±ï¿½ï¿½Ä¼ï¿½
+    /// ¶Ô»°ÎÄ±¾ÎÄ¼þ
     /// </summary>
     [SerializeField] TextAsset dialogDataFile;
     /// <summary>
-    /// ï¿½ï¿½ï¿½Ò²ï¿½ï¿½É«Í¼ï¿½ï¿½
+    /// ×óÓÒ²à½ÇÉ«Í¼Ïñ
     /// </summary>
     [SerializeField] Image imageLeft;
     [SerializeField] Image imageRight;
     /// <summary>
-    /// ï¿½ï¿½É«ï¿½ï¿½ï¿½ï¿½ï¿½Ä±ï¿½
+    /// ½ÇÉ«Ãû³ÆÎÄ±¾
     /// </summary>
     [SerializeField] TMP_Text nameText;
     /// <summary>
-    /// ï¿½Ô»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä±ï¿½
+    /// ¶Ô»°ÄÚÈÝÎÄ±¾
     /// </summary>
     [SerializeField] TMP_Text dialogText;
     /// <summary>
-    /// ï¿½ï¿½É«Í¼Æ¬ï¿½Ð±ï¿½
+    /// ½ÇÉ«Í¼Æ¬ÁÐ±í
     /// </summary>
     [SerializeField] List<Sprite> images = new List<Sprite>();
     /// <summary>
-    /// ï¿½ï¿½É«ï¿½ï¿½ï¿½Ö¶ï¿½Ó¦Í¼Æ¬ï¿½ï¿½ï¿½Öµï¿½
+    /// ½ÇÉ«Ãû×Ö¶ÔÓ¦Í¼Æ¬µÄ×Öµä
     /// </summary>
     Dictionary<string, Sprite> imageDic = new Dictionary<string, Sprite>();
     /// <summary>
-    /// ï¿½ï¿½Ç°ï¿½Ä¶Ô»ï¿½ï¿½ï¿½ï¿½ï¿½
+    /// µ±Ç°µÄ¶Ô»°Ë÷Òý
     /// </summary>
     [SerializeField] int dialogIndex;
     /// <summary>
-    /// ï¿½Ô»ï¿½ï¿½Ä±ï¿½ï¿½ï¿½ï¿½Ð·Ö¸ï¿½
+    /// ¶Ô»°ÎÄ±¾°´ÐÐ·Ö¸î
     /// </summary>
     [SerializeField] string[] dialogRows;
     /// <summary>
-    /// ï¿½ï¿½ï¿½ï¿½ï¿½Ô»ï¿½ï¿½ï¿½Å¥
+    /// ¼ÌÐø¶Ô»°°´Å¥
     /// </summary>
     [SerializeField] Button nextButton;
     /// <summary>
-    /// Ñ¡ï¿½î°´Å¥Ô¤ï¿½ï¿½ï¿½ï¿½
+    /// Ñ¡Ïî°´Å¥Ô¤ÖÆÌå
     /// </summary>
     [SerializeField] GameObject optionButton;
     /// <summary>
-    /// Ñ¡ï¿½î°´Å¥ï¿½ï¿½ï¿½Úµã£¬ï¿½ï¿½ï¿½ï¿½ï¿½Ô¶ï¿½ï¿½ï¿½ï¿½Ð¡ï¿½
+    /// Ñ¡Ïî°´Å¥¸¸½Úµã£¬ÓÃÓÚ×Ô¶¯ÅÅÁÐ¡£
     /// </summary>
     [SerializeField] Transform buttonGroup;
-
+    /// <summary>
+    /// ¶¯Ì¬¸ú×ÙNPCÔÚÓÎÏ·ÖÐµÄ×´Ì¬,ÀýÈçºÃ¸Ð¶ÈºÍÌåÁ¦Öµ
+    /// </summary>
     public List<Person> people = new List<Person>();
+    /// <summary>
+    /// ¶Ô»°Ãæ°åUI¸ùÎïÌå
+    /// </summary>
+    [SerializeField] GameObject dialogUI;
 
     private void Awake()
     {
-        imageDic["ï¿½ï¿½ï¿½"] = images[0];
-        imageDic["ï¿½ï¿½ï¿½ï¿½"] = images[1];
+        imageDic["Áè¹â"] = images[0];
+        imageDic["¸ÊÓê"] = images[1];
         
         Person person1 = new Person();
-<<<<<<< HEAD
         person1.npcName = "Áè¹â";
         people.Add(person1);
 
         Person person2 = new Person();
         person2.npcName = "¸ÊÓê";
-=======
-        person1.name = "ï¿½ï¿½ï¿½";
-        people.Add(person1);
-
-        Person person2 = new Person();
-        person2.name = "ï¿½ï¿½ï¿½ï¿½";
->>>>>>> bcd55077721ec647186aec230b4a9251804aea71
         people.Add(person2);
     }
     void Start()
     {       
-        ReadText(dialogDataFile);
+        //ReadText(dialogDataFile);
         ShowDialogRow();
     }
         
@@ -96,11 +95,11 @@ public class DialogManager : MonoBehaviour
 
     private void UpdateImage(string _name,string _position)
     {
-        if(_position == "ï¿½ï¿½")
+        if(_position == "×ó")
         {
             imageLeft.sprite = imageDic[_name];
         }
-        else if(_position == "ï¿½ï¿½")
+        else if(_position == "ÓÒ")
         {
             imageLeft.sprite = imageDic[_name];
         }
@@ -112,12 +111,12 @@ public class DialogManager : MonoBehaviour
         //{
         //    string[] cell = row.Split(',');            
         //}
-        Debug.Log("ï¿½ï¿½È¡ï¿½É¹ï¿½");
+        Debug.Log("¶ÁÈ¡³É¹¦");
     } 
 
 
     /// <summary>
-    /// ï¿½Ä±ï¿½ï¿½Ð¶Ï£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    /// ÎÄ±¾ÅÐ¶Ï£¬¹¦ÄÜÌí¼Ó¶¼ÔÚÕâÀï
     /// </summary>
     public void ShowDialogRow()
     {
@@ -140,14 +139,14 @@ public class DialogManager : MonoBehaviour
             }
             else if (cells[0] == "END" && int.Parse(cells[1]) == dialogIndex)
             {
-                Debug.Log("ï¿½Ô»ï¿½ï¿½ï¿½ï¿½ï¿½");
+                EndDialogue();
             }
         }
     }
         
     public void OnclickNext()
     {
-        ShowDialogRow();       
+        ShowDialogRow();        
     }
 
     public void GenerateOption(int _index)
@@ -156,9 +155,8 @@ public class DialogManager : MonoBehaviour
         if (cells[0] == "@")
         {
             GameObject button = Instantiate(optionButton, buttonGroup);
-            //ï¿½ó¶¨°ï¿½Å¥ï¿½Â¼ï¿½
+            //°ó¶¨°´Å¥ÊÂ¼þ
             button.GetComponentInChildren<TMP_Text>().text = cells[4];
-<<<<<<< HEAD
 
             
             button.GetComponent<Button>().onClick.AddListener(() =>
@@ -172,19 +170,9 @@ public class DialogManager : MonoBehaviour
                     OptionEffect(effect[0], int.Parse(effect[1]), cells[7]);
                 }*/
             });
-=======
-            button.GetComponent<Button>().onClick.AddListener( 
-                ()=> OnOptionClick( int.Parse(cells[5])); 
-            if(cells[6] != null)
-            {
-
-            }
-            
-            );
->>>>>>> bcd55077721ec647186aec230b4a9251804aea71
             GenerateOption(_index + 1);
         }        
-    }
+    }   
 
     public void OnOptionClick(int _id)
     {
@@ -197,9 +185,9 @@ public class DialogManager : MonoBehaviour
         nextButton.gameObject.SetActive(true );
     }
 
-    public void OptionEffect(string _effect,  int _param, string _target)
+    private void OptionEffect(string _effect,  int _param, string _target)
     {
-        if(_effect == "ï¿½Ã¸Ð¶ï¿½ï¿½ï¿½ï¿½ï¿½")
+        if(_effect == "ºÃ¸Ð¶ÈÔö¼Ó")
         {
             foreach(var person in people)
             {
@@ -209,7 +197,7 @@ public class DialogManager : MonoBehaviour
                 }
             }
         }
-        else if(_effect == "ï¿½ï¿½ï¿½ï¿½Öµï¿½ï¿½ï¿½ï¿½")
+        else if(_effect == "ÌåÁ¦ÖµÔö¼Ó")
         {
             foreach (var person in people)
             {
@@ -219,5 +207,18 @@ public class DialogManager : MonoBehaviour
                 }
             }
         }
+    }
+    public void StartDialogue(TextAsset dialogText)
+    {
+        ReadText(dialogText);
+        dialogUI.SetActive(true); // ¼¤»î¶Ô»°½çÃæ
+        ShowDialogRow(); // ÏÔÊ¾µ±Ç°¶Ô»°ÐÐ
+    }
+    
+    public void EndDialogue()
+    {
+        dialogUI.SetActive(false); // ¹Ø±Õ¶Ô»°½çÃæ
+        // ÇåÀí»òÖØÖÃÆäËû¶Ô»°Ïà¹ØµÄ×´Ì¬
+        Debug.Log("¶Ô»°½áÊø");
     }
 }
