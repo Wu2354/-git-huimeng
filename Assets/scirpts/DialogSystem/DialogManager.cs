@@ -69,11 +69,11 @@ public class DialogManager : MonoBehaviour
         imageDic["甘雨"] = images[1];
         
         Person person1 = new Person();
-        person1.name = "凌光";
+        person1.npcName = "凌光";
         people.Add(person1);
 
         Person person2 = new Person();
-        person2.name = "甘雨";
+        person2.npcName = "甘雨";
         people.Add(person2);
     }
     void Start()
@@ -158,16 +158,17 @@ public class DialogManager : MonoBehaviour
             //绑定按钮事件
             button.GetComponentInChildren<TMP_Text>().text = cells[4];
 
-            //按钮分支选择效果的添加（搭配对话文本实现）
+            
             button.GetComponent<Button>().onClick.AddListener(() =>
             {
                 OnOptionClick(int.Parse(cells[5]));
-                if (cells.Length > 6 && cells[6] != null)
+                //按钮分支选择效果的添加（搭配对话文本实现）
+                /*if (cells.Length > 6 && cells[6] != null)
                 {
                     string[] effect = cells[6].Split("@");
                     cells[7] = Regex.Replace(cells[7], @"[\r\n]", "");
-                    //OptionEffect(effect[0], int.Parse(effect[1]), cells[7]);
-                }
+                    OptionEffect(effect[0], int.Parse(effect[1]), cells[7]);
+                }*/
             });
             GenerateOption(_index + 1);
         }        
@@ -190,7 +191,7 @@ public class DialogManager : MonoBehaviour
         {
             foreach(var person in people)
             {
-                if(person.name == _target)
+                if(person.npcName == _target)
                 {
                     person.likeValue += _param;
                 }
@@ -200,7 +201,7 @@ public class DialogManager : MonoBehaviour
         {
             foreach (var person in people)
             {
-                if (person.name == _target)
+                if (person.npcName== _target)
                 {
                     person.strengthValue += _param;
                 }

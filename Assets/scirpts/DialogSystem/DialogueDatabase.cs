@@ -9,7 +9,7 @@ public class DialogueDatabase : ScriptableObject
     // 添加获取对话文件的方法，根据NPC的名字或其他属性
     public TextAsset GetDialogueForNPC(string npcName)
     {
-        Person person = persons.Find(de => de.name == npcName && de.isAvailable);
+        Person person = persons.Find(de => de.npcName == npcName && de.isAvailable);
         return person?.dialogFile;
     }
 }
