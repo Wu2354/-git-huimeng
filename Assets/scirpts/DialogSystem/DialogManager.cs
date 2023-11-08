@@ -69,15 +69,15 @@ public class DialogManager : MonoBehaviour
 
     private void Awake()
     {
-        imageDic["凌光"] = images[0];
-        imageDic["甘雨"] = images[1];
+        imageDic["郭老师"] = images[0];
+        imageDic["小灵"] = images[1];
         
         Person person1 = new Person();
-        person1.npcName = "凌光";
+        person1.npcName = "郭老师";
         people.Add(person1);
 
         Person person2 = new Person();
-        person2.npcName = "甘雨";
+        person2.npcName = "小灵";
         people.Add(person2);
     }
     void Start()
@@ -126,14 +126,18 @@ public class DialogManager : MonoBehaviour
             {
                 UpdateText(cells[2], cells[4]);
                 UpdateImage(cells[2], cells[3]);
-
+                if(dialogText.gameObject.activeSelf == false)
+                {
+                    dialogText.gameObject.SetActive(true);
+                }
+                dialogText.gameObject.SetActive(true);
                 dialogIndex = int.Parse(cells[5]);
                 break;
             }
             else if (cells[0] == "@" && int.Parse(cells[1]) == dialogIndex)
             {
                 UpdateImage(cells[2], cells[3]);
-                nextButton.gameObject.SetActive(false);
+                nextButton.gameObject.SetActive(false);              
                 GenerateOption(i);
             }
             else if (cells[0] == "END" && int.Parse(cells[1]) == dialogIndex)
@@ -148,8 +152,15 @@ public class DialogManager : MonoBehaviour
         ShowDialogRow();        
     }
 
+    /// <summary>
+    /// 处理分支选择
+    /// </summary>
+    /// <param name="_index"></param>
     public void GenerateOption(int _index)
     {
+        //隐藏当前文本
+        dialogText.gameObject.SetActive(false);
+
         string[] cells = dialogRows[_index].Split(',');
         if (cells[0] == "@")
         {
@@ -170,7 +181,7 @@ public class DialogManager : MonoBehaviour
                 }*/
             });
             GenerateOption(_index + 1);
-        }        
+        }                   
     }   
 
     public void OnOptionClick(int _id)
