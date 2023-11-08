@@ -16,5 +16,5 @@ MonoBehaviour:
   - npcName: ling
     likeValue: 0
     strengthValue: 0
-    dialogFile: {fileID: 4900000, guid: 62d21e6ad7fdf9843aeae43c92e4fa2e, type: 3}
+    dialogFile: {fileID: 4900000, guid: 547127b1eea36c84695c3441d9ab4c50, type: 3}
     isAvailable: 1

@@ -62,18 +62,22 @@ public class DialogManager : MonoBehaviour
     /// 对话面板UI根物体
     /// </summary>
     [SerializeField] GameObject dialogUI;
+    /// <summary>
+    /// 判断是否在对话状态
+    /// </summary>
+    private bool isInDialogue = false;
 
     private void Awake()
     {
-        imageDic["凌光"] = images[0];
-        imageDic["甘雨"] = images[1];
+        imageDic["郭老师"] = images[0];
+        imageDic["小灵"] = images[1];
         
         Person person1 = new Person();
-        person1.npcName = "凌光";
+        person1.npcName = "郭老师";
         people.Add(person1);
 
         Person person2 = new Person();
-        person2.npcName = "甘雨";
+        person2.npcName = "小灵";
         people.Add(person2);
     }
     void Start()
@@ -81,12 +85,7 @@ public class DialogManager : MonoBehaviour
         //ReadText(dialogDataFile);
         ShowDialogRow();
     }
-        
-    void Update()
-    {
-        
-    }
-
+               
     private void UpdateText(string _name, string _text)
     {
         nameText.text = _name;
@@ -127,14 +126,18 @@ public class DialogManager : MonoBehaviour
             {
                 UpdateText(cells[2], cells[4]);
                 UpdateImage(cells[2], cells[3]);
-
+                if(dialogText.gameObject.activeSelf == false)
+                {
+                    dialogText.gameObject.SetActive(true);
+                }
+                dialogText.gameObject.SetActive(true);
                 dialogIndex = int.Parse(cells[5]);
                 break;
             }
             else if (cells[0] == "@" && int.Parse(cells[1]) == dialogIndex)
             {
                 UpdateImage(cells[2], cells[3]);
-                nextButton.gameObject.SetActive(false);
+                nextButton.gameObject.SetActive(false);              
                 GenerateOption(i);
             }
             else if (cells[0] == "END" && int.Parse(cells[1]) == dialogIndex)
@@ -149,8 +152,15 @@ public class DialogManager : MonoBehaviour
         ShowDialogRow();        
     }
 
+    /// <summary>
+    /// 处理分支选择
+    /// </summary>
+    /// <param name="_index"></param>
     public void GenerateOption(int _index)
     {
+        //隐藏当前文本
+        dialogText.gameObject.SetActive(false);
+
         string[] cells = dialogRows[_index].Split(',');
         if (cells[0] == "@")
         {
@@ -171,7 +181,7 @@ public class DialogManager : MonoBehaviour
                 }*/
             });
             GenerateOption(_index + 1);
-        }        
+        }                   
     }   
 
     public void OnOptionClick(int _id)
@@ -210,7 +220,14 @@ public class DialogManager : MonoBehaviour
     }
     public void StartDialogue(TextAsset dialogText)
     {
-        ReadText(dialogText);
+        //如果玩家不在对话中，初始化对话
+        if(!isInDialogue)
+        {
+            ReadText(dialogText);
+            dialogIndex = 0;
+            isInDialogue = true;
+        }
+        
         dialogUI.SetActive(true); // 激活对话界面
         ShowDialogRow(); // 显示当前对话行
     }
@@ -218,7 +235,8 @@ public class DialogManager : MonoBehaviour
     public void EndDialogue()
     {
         dialogUI.SetActive(false); // 关闭对话界面
+        isInDialogue = false;
         // 清理或重置其他对话相关的状态
-        Debug.Log("对话结束");
+        Debug.Log("对话结束");       
     }
 }
