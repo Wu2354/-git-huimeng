@@ -62,6 +62,10 @@ public class DialogManager : MonoBehaviour
     /// 对话面板UI根物体
     /// </summary>
     [SerializeField] GameObject dialogUI;
+    /// <summary>
+    /// 判断是否在对话状态
+    /// </summary>
+    private bool isInDialogue = false;
 
     private void Awake()
     {
@@ -81,12 +85,7 @@ public class DialogManager : MonoBehaviour
         //ReadText(dialogDataFile);
         ShowDialogRow();
     }
-        
-    void Update()
-    {
-        
-    }
-
+               
     private void UpdateText(string _name, string _text)
     {
         nameText.text = _name;
@@ -210,7 +209,14 @@ public class DialogManager : MonoBehaviour
     }
     public void StartDialogue(TextAsset dialogText)
     {
-        ReadText(dialogText);
+        //如果玩家不在对话中，初始化对话
+        if(!isInDialogue)
+        {
+            ReadText(dialogText);
+            dialogIndex = 0;
+            isInDialogue = true;
+        }
+        
         dialogUI.SetActive(true); // 激活对话界面
         ShowDialogRow(); // 显示当前对话行
     }
@@ -218,7 +224,8 @@ public class DialogManager : MonoBehaviour
     public void EndDialogue()
     {
         dialogUI.SetActive(false); // 关闭对话界面
+        isInDialogue = false;
         // 清理或重置其他对话相关的状态
-        Debug.Log("对话结束");
+        Debug.Log("对话结束");       
     }
 }
