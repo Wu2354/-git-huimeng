@@ -137,6 +137,7 @@ public class DialogManager : MonoBehaviour
             else if (cells[0] == "@" && int.Parse(cells[1]) == dialogIndex)
             {
                 UpdateImage(cells[2], cells[3]);
+                UpdateText(cells[2], cells[4]);
                 nextButton.gameObject.SetActive(false);              
                 GenerateOption(i);
             }
