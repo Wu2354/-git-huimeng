@@ -1,10 +1,24 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: e75250311c4fa28438a06b0cf03401df
 timeCreated: 1551086912
 licenseType: Store
 NativeFormatImporter:
   externalObjects: {}
   mainObjectFileID: 2100000
+=======
+<<<<<<<< HEAD:Assets/Animations/Animal pack deluxe v2/Materials/Domestic_sheep_mat 1.mat.meta
+guid: 528db09687c6431458ebadaed9262875
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+========
+guid: e75250311c4fa28438a06b0cf03401df
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+>>>>>>>> 3f63933d74d08d0ed68a693b24f0773f147c0057:Assets/Animations/Animal pack deluxe v2/Materials/Bat_mat.mat.meta
+>>>>>>> 3f63933d74d08d0ed68a693b24f0773f147c0057
   userData: 
   assetBundleName: 
   assetBundleVariant: 
