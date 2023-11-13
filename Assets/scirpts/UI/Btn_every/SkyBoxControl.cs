@@ -7,7 +7,7 @@ using static UnityEngine.InputSystem.Layouts.InputControlLayout;
 public class SkyBoxControl : MonoBehaviour
 {
     public SkyboxBlender skyboxBlender;
-    public GameObject btn_item;//中间元素开关
+    public GameObject btnItem;//中间元素开关
     private bool isOpen = false;
     private Button button;
 
@@ -31,23 +31,44 @@ public class SkyBoxControl : MonoBehaviour
     //控制天空盒的旋转
     private void rotateSky()
     {
-        isRotate = !isRotate;
-        skyboxBlender.Blend(isCycle,isRotate);//true就会旋转了(第二个参数控制)
+        // 如果正在旋转，则停止旋转；否则开始旋转
+        if (isRotate)
+        {
+            isRotate = false;
+            skyboxBlender.StopRotation();
+        }
+        else
+        {
+            isRotate = true;
+            UpdateSkybox();
+        }
     }
 
 
     //循环天空盒
     private void cycleSky()
-    {
+    {        
+        if (isOpen)
+        {
+            skyboxBlender.Stop();
+        }
+        else
+        {
+            UpdateSkybox(); //false就会循环(第一个参数控制)  
+        }
+           
         isCycle = !isCycle;
-        skyboxBlender.Blend(isCycle,isRotate);  //false就会循环(第一个参数控制)     
     }
-
+    
+    private void UpdateSkybox()
+    {
+        skyboxBlender.Blend(isCycle, isRotate);
+    }
 
     //控制中间元素显示
     private void ControlItem()
     {
         isOpen = !isOpen;
-        btn_item.SetActive(isOpen);
+        btnItem.SetActive(isOpen);
     }
 }
