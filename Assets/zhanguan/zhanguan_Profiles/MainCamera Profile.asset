@@ -47,7 +47,7 @@ MonoBehaviour:
     value: 65472
   diffusion:
     overrideState: 1
-    value: 6.49
+    value: 5.6
   anamorphicRatio:
     overrideState: 1
     value: 0
@@ -164,7 +164,7 @@ MonoBehaviour:
     defaultState: 1
   tonemapper:
     overrideState: 1
-    value: 1
+    value: 2
   toneCurveToeStrength:
     overrideState: 0
     value: 0
