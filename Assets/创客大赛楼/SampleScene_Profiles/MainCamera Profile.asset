@@ -117,7 +117,7 @@ MonoBehaviour:
     defaultState: 1
   tonemapper:
     overrideState: 1
-    value: 0
+    value: 1
   toneCurveToeStrength:
     overrideState: 0
     value: 0
@@ -1421,19 +1421,19 @@ MonoBehaviour:
     value: 1
   intensity:
     overrideState: 1
-    value: 2.39
+    value: 1.56
   threshold:
     overrideState: 1
     value: 0.93
   softKnee:
     overrideState: 1
-    value: 0.574
+    value: 0.575
   clamp:
     overrideState: 1
     value: 65472
   diffusion:
     overrideState: 1
-    value: 4.4
+    value: 5.47
   anamorphicRatio:
     overrideState: 1
     value: 0

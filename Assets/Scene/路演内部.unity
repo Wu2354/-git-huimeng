@@ -1896,7 +1896,7 @@ PrefabInstance:
     - target: {fileID: -4972339778987464676, guid: bd885f0191c6cff4ba5dbed740112d70, type: 3}
       propertyPath: m_Materials.Array.data[43]
       value: 
-      objectReference: {fileID: 2100000, guid: 4a3a2498ecb66e5419debe2fcd0bc51e, type: 2}
+      objectReference: {fileID: 2100000, guid: b00b35b942e95cb4a91392fc81820647, type: 2}
     - target: {fileID: -4972339778987464676, guid: bd885f0191c6cff4ba5dbed740112d70, type: 3}
       propertyPath: m_Materials.Array.data[44]
       value: 
@@ -2490,7 +2490,7 @@ Light:
     m_Type: 2
     m_Resolution: -1
     m_CustomResolution: -1
-    m_Strength: 1
+    m_Strength: 0.568
     m_Bias: 0.05
     m_NormalBias: 0.4
     m_NearPlane: 0.2
