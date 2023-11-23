@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< Updated upstream:Assets/Animations/Animal pack deluxe v2/Animations/Materials/Default.mat.meta
 guid: a3675f0cc6885fa46aba78ded59b26fd
+========
+guid: a20127abbd61f014688db0c74ecba01f
+>>>>>>>> Stashed changes:Assets/Animations/Animal pack deluxe v2/Animations/Materials/Default_Material.mat.meta
 NativeFormatImporter:
   externalObjects: {}
   mainObjectFileID: 0
